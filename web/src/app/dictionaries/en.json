@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "title": "cineIze Angola — The Best Cinema Experience",
+    "description": "Check out the movies currently showing, pre-sales, and premieres at cineIze theaters in Angola. Get your tickets online now!"
+  },
+  "nav": {
+    "open_menu": "Open Menu",
+    "search_placeholder": "Search movies, actors, theaters...",
+    "search_placeholder_mobile": "Search movies...",
+    "search_title": "Search",
+    "programming": "Schedule",
+    "movies": "Movies",
+    "movies_desc": "Check updated showtimes and secure the best seats in our theaters.",
+    "now_showing": "Now Showing",
+    "now_showing_desc": "Movies showing today in our theaters.",
+    "coming_soon": "Coming Soon & Pre-Sale",
+    "coming_soon_desc": "Upcoming releases and exclusive pre-sales.",
+    "vip": "VIP & 3D Rooms",
+    "vip_desc": "Discover the comfort and luxury of VIP rooms.",
+    "cinemas": "Theaters",
+    "bar": "Bar & Popcorn",
+    "week_schedule": "Weekly Schedule",
+    "vip_experiences": "VIP Rooms & Experiences"
+  },
+  "footer": {
+    "bio": "The largest cinema network in Angola. Watch the best global blockbusters and national films with top sound and projection technology.",
+    "customer_support": "Customer Support (+244)",
+    "programming": "Schedule",
+    "now_showing": "Now Showing",
+    "coming_soon": "Coming Soon & Pre-Sale",
+    "vip_rooms": "VIP Rooms",
+    "experience_3d": "3D Experience",
+    "cinemas_angola": "Theaters in Angola",
+    "support_info": "Support & Information",
+    "faq": "Frequently Asked Questions",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "rules": "Cinema Rules",
+    "contact": "Contact Us",
+    "rights": "cineIze Angola — All rights reserved.",
+    "slogan": "Feel the Magic of Cinema"
+  },
+  "feeds": {
+    "now_showing": "Now Showing",
+    "pre_sale": "Pre-Sale",
+    "coming_soon": "Coming Soon",
+    "view_all": "View All"
+  },
+  "movies": {
+    "page": {
+      "title": "Movies & Sessions - cineIze Angola",
+      "description": "Check out movies currently showing, pre-sales, and premieres at cineIze theaters in Angola.",
+      "tag": "Billboard & Premieres",
+      "heading": "Cinema Schedule",
+      "subtitle": "Pick your favorite movie, view available sessions across cineIze theaters in Angola, and secure your tickets."
+    },
+    "hero": {
+      "featured": "Featured",
+      "buy_ticket": "Buy Ticket",
+      "watch_trailer": "Watch Trailer",
+      "view_details": "View Details",
+      "subtitle_lang": "SUB"
+    },
+    "card": {
+      "pre_premiere": "Pre-Premiere",
+      "click_to_select": "Click to select this time and pick seats"
+    },
+    "header": {
+      "pre_premiere_special": "Special Pre-Premiere",
+      "presale_open": "Pre-Sale Open",
+      "now_showing": "Now Showing",
+      "coming_soon_cinemas": "Coming Soon to Theaters",
+      "premiere_date": "Premiere",
+      "director": "Director",
+      "notify_me": "Notify Me",
+      "watch_trailer": "Watch Trailer",
+      "subtitles": "SUB"
+    },
+    "info": {
+      "synopsis": "Synopsis",
+      "show_less": "Show less",
+      "read_more": "Read more",
+      "cast_crew": "Cast & Crew",
+      "director": "Director",
+      "trailer": "Trailer"
+    },
+    "list": {
+      "filters": "Filters",
+      "close_menu": "Close menu",
+      "status": "Status",
+      "all_movies": "All Movies",
+      "now_showing": "Now Showing",
+      "pre_sale": "Pre-Sale",
+      "coming_soon": "Coming Soon",
+      "format": "Format",
+      "any_format": "Any Format",
+      "no_movies": "No movies found",
+      "no_results_desc": "No results were found for the selected filters.",
+      "clear_filters": "Clear Filters",
+      "end_of_catalog": "You have reached the end of the movie catalog."
+    },
+    "cinema_picker": {
+      "title": "Select Theater",
+      "subtitle": "Choose the cinema where you wish to watch",
+      "placeholder": "Search by cinema or city...",
+      "no_cinemas": "No theaters found.",
+      "no_sessions": "No showtimes",
+      "session_one": "session",
+      "session_many": "sessions"
+    },
+    "notify_modal": {
+      "title": "Notify Me",
+      "success_title": "All set!",
+      "success_message": "We will notify you as soon as pre-sale tickets for {movieTitle} become available.",
+      "prompt": "Where would you like to receive the notification when ticket sales open? (Fill out one or both)",
+      "email": "Email",
+      "email_placeholder": "example@email.com",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "saving": "Saving..."
+    },
+    "trailer_modal": {
+      "title": "Trailer",
+      "close": "Close trailer",
+      "error_message": "Could not load trailer here.",
+      "watch_original": "Watch on original site →"
+    },
+    "sessions_list": {
+      "title": "Available Sessions",
+      "no_sessions": "No available sessions for this theater.",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "session_one": "session",
+      "session_many": "sessions",
+      "pre_premiere": "Pre-Premiere",
+      "view_session": "View Session",
+      "tiers": {
+        "WEEKDAY": "Weekday",
+        "WEEKEND": "Weekend",
+        "HOLIDAY": "Holiday",
+        "STUDENT": "Student"
+      }
+    }
+  },
+  "sessions": {
+    "header": {
+      "session": "Session",
+      "pre_premiere": "Pre-Premiere",
+      "start": "Start",
+      "end": "End",
+      "duration": "Duration",
+      "seats_count": "seats",
+      "ticket_price": "Price per Ticket",
+      "buy_ticket": "Buy Ticket",
+      "choose_seats": "Choose Seats",
+      "sale_opens": "Sale opens",
+      "session_started": "Session already started",
+      "tiers": {
+        "WEEKDAY": "Weekday",
+        "WEEKEND": "Weekend",
+        "HOLIDAY": "Holiday",
+        "STUDENT": "Student"
+      }
+    },
+    "seat_map": {
+      "mvp_warning_title": "Demo Mode (MVP):",
+      "mvp_warning_desc": "Real payment system is unavailable. The purchase will be a simulation only.",
+      "back": "Back",
+      "seats_free": "free",
+      "screen": "SCREEN",
+      "legend_title": "Legend",
+      "available": "Available",
+      "selected": "Selected",
+      "reserved": "Reserved",
+      "occupied": "Occupied",
+      "drag_helper": "Drag to navigate around the room",
+      "qty": "Qty:",
+      "clear": "Clear",
+      "select_seats_prompt_one": "Select 1 seat on the map",
+      "select_seats_prompt_many": "Select {count} seats on the map",
+      "total_simulation": "Total (Simulation)",
+      "continue": "Continue"
+    },
+    "checkout": {
+      "contact_title": "Identification",
+      "contact_desc": "How would you like to receive your digital tickets?",
+      "mvp_title": "Demo Mode (MVP)",
+      "mvp_desc": "Real payment system is unavailable in this version. This flow is only a purchase simulation.",
+      "random_seat_title": "Randomly assigned seat",
+      "random_seat_desc": "The system selected seat {seats} for you. Prefer to choose manually? Close this screen and click 'Choose Seats'.",
+      "email": "Email",
+      "email_placeholder": "example@example.com",
+      "or": "Or",
+      "whatsapp": "WhatsApp",
+      "whatsapp_placeholder": "+244 9XX XXX XXX",
+      "continue_payment": "Continue to Payment (Simulation)",
+      "back": "← Back",
+      "payment_title": "Payment",
+      "payment_desc": "Choose your preferred payment method.",
+      "multicaixa_express": "Multicaixa Express",
+      "unitel_money": "Unitel Money",
+      "tickets_count": "{count}x Ticket(s)",
+      "total_simulate": "Total to Simulate",
+      "simulate_payment": "Simulate Payment",
+      "processing_title": "Simulating payment...",
+      "processing_desc": "Generating test ticket for evaluation purposes."
+    },
+    "ticket": {
+      "brand": "cineIze",
+      "entry_proof": "PROOF OF ENTRY ({current}/{total})",
+      "movie": "MOVIE:",
+      "rating": "RATING:",
+      "format": "FORMAT:",
+      "duration": "DURATION:",
+      "min": "MIN",
+      "room": "ROOM:",
+      "seat": "SEAT:",
+      "session": "SESSION:",
+      "date": "DATE:",
+      "row": "ROW:",
+      "seat_number": "SEAT NUMBER:",
+      "seat_type": "SEAT TYPE:",
+      "unit_price": "UNIT PRICE:",
+      "payment": "PAYMENT:",
+      "contact": "CONTACT:",
+      "validity_notice": "VALID ONLY FOR THE SPECIFIED DATE AND TIME • KEEP THIS TICKET",
+      "rights": "cineIze Angola • All rights reserved"
+    }
+  },
+  "days": {
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sun_short": "Sun",
+    "mon_short": "Mon",
+    "tue_short": "Tue",
+    "wed_short": "Wed",
+    "thu_short": "Thu",
+    "fri_short": "Fri",
+    "sat_short": "Sat"
+  }
+}

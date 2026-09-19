@@ -1,0 +1,98 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
+
+    services:
+      postgres:
+        image: postgres:16.4-alpine
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd="pg_isready -U test"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=5
+      redis:
+        image: redis:7.4-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: api/package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Gerar Prisma Client
+        run: npx prisma generate
+
+      - name: Aplicar migrações na BD de teste
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: postgresql://test:test@localhost:5432/test
+
+      - name: Testes Unitários
+        run: npm run test
+
+      - name: Testes E2E (Integração)
+        run: npm run test:e2e
+        env:
+          PORT: 5000
+          DATABASE_URL: postgresql://test:test@localhost:5432/test
+          DB_USER: test
+          DB_NAME: test
+          DB_PASSWORD: test
+          REDIS_URL: redis://localhost:6379
+          BETTER_AUTH_URL: http://localhost:5000
+          BETTER_AUTH_SECRET: super-secret-key-com-pelo-menos-32-chars!
+          GOOGLE_CLIENT_ID: dummy-google-id
+          GOOGLE_CLIENT_SECRET: dummy-google-secret
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy na VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -e
+            echo "==> A entrar na pasta do projeto..."
+            cd /cineize
+
+            echo "==> A puxar as últimas alterações do Git..."
+            git pull origin main
+
+            echo "==> A fazer rebuild e restart do container da API..."
+            make vps

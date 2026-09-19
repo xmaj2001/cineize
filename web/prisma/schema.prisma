@@ -1,0 +1,411 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ═══════════════════════════════════════════════════
+// 1. IDENTIDADE / AUTH (Better Auth — mantido)
+// ═══════════════════════════════════════════════════
+
+enum UserRole {
+  CLIENT
+  STAFF
+  ADMIN
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  name          String
+  emailVerified Boolean  @default(false)
+  image         String?
+  passwordHash  String?
+  phone         String? // usado para notificações SMS
+  whatsapp      String? // usado para notificações via WhatsApp
+  role          UserRole @default(CLIENT)
+
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  deletedAt         DateTime?
+  sessions          Session[]
+  accounts          Account[]
+  oauthApplications OauthApplication[]
+  oauthAccessTokens OauthAccessToken[]
+  oauthConsents     OauthConsent[]
+  location          Location?          @relation(fields: [locationId], references: [id])
+  locationId        String?
+  orders            Order[]
+  reviews           MovieReview[]
+  checkIns          Ticket[]           @relation("CheckedInBy")
+
+  @@index([role])
+  @@map("users")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model OauthApplication {
+  id                String             @id
+  name              String
+  icon              String?
+  metadata          String?
+  clientId          String
+  clientSecret      String?
+  redirectUrls      String
+  type              String
+  disabled          Boolean?           @default(false)
+  userId            String?
+  user              User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime
+  updatedAt         DateTime
+  oauthaccesstokens OauthAccessToken[]
+  oauthconsents     OauthConsent[]
+
+  @@unique([clientId])
+  @@index([userId])
+  @@map("oauth_application")
+}
+
+model OauthAccessToken {
+  id                    String           @id
+  accessToken           String
+  refreshToken          String
+  accessTokenExpiresAt  DateTime
+  refreshTokenExpiresAt DateTime
+  clientId              String
+  oauthapplication      OauthApplication @relation(fields: [clientId], references: [clientId], onDelete: Cascade)
+  userId                String?
+  user                  User?            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scopes                String
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@unique([accessToken])
+  @@unique([refreshToken])
+  @@index([clientId])
+  @@index([userId])
+  @@map("oauth_access_token")
+}
+
+model OauthConsent {
+  id               String           @id
+  clientId         String
+  oauthapplication OauthApplication @relation(fields: [clientId], references: [clientId], onDelete: Cascade)
+  userId           String
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scopes           String
+  createdAt        DateTime
+  updatedAt        DateTime
+  consentGiven     Boolean
+
+  @@index([clientId])
+  @@index([userId])
+  @@map("oauth_consent")
+}
+
+// ═══════════════════════════════════════════════════
+// 2. ESTRUTURA FÍSICA
+// ═══════════════════════════════════════════════════
+
+model Location {
+  id        String  @id @default(uuid())
+  name      String
+  city      String
+  province  String
+  address   String?
+  phone     String?
+  latitude  Float
+  longitude Float
+  rooms     Room[]
+  users     User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+  @@index([province])
+  @@index([latitude, longitude])
+  @@map("locations")
+}
+
+enum ScreenFormat {
+  D2
+  D3
+  D4X
+  IMAX
+  VIP
+}
+
+model Room {
+  id            String         @id @default(uuid())
+  name          String
+  capacity      Int
+  format        ScreenFormat // fixo — o equipamento da sala não muda por sessão
+  locationId    String
+  location      Location       @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  seats         Seat[]
+  sessionMovies SessionMovie[]
+
+  @@index([locationId])
+  @@map("rooms")
+}
+
+enum SeatType {
+  STANDARD
+  RECLINER // poltrona premium dentro de uma sala não-VIP
+  ACCESSIBLE
+}
+
+model Seat {
+  id             String          @id @default(uuid())
+  row            String
+  number         Int
+  type           SeatType        @default(STANDARD)
+  roomId         String
+  room           Room            @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  sessionTickets SessionTicket[]
+
+  @@unique([roomId, row, number])
+  @@map("seats")
+}
+
+// ═══════════════════════════════════════════════════
+// 3. CATALOGAÇÃO E EXIBIÇÃO
+// ═══════════════════════════════════════════════════
+
+enum MovieStatus {
+  ARCHIVED
+  ACTIVE
+}
+
+model Movie {
+  id               String      @id @default(uuid())
+  title            String
+  originalTitle    String?
+  synopsis         String
+  genres           String[]    @default([])
+  language         String
+  subtitleLanguage String?
+  cast             String[]    @default([])
+  director         String
+  posterUrl        String
+  bannerUrl        String?
+  trailerUrl       String?
+  durationMin      Int
+  ageRating        String
+  featured         Boolean     @default(false)
+  releaseDate      DateTime // data da estreia oficial (referência, não controla venda)
+  status           MovieStatus @default(ACTIVE)
+
+  sessionMovies        SessionMovie[]
+  presaleSubscriptions PresaleSubscription[]
+  reviews              MovieReview[]
+
+  relatedTo   Movie[] @relation("RelatedMovies")
+  relatedFrom Movie[] @relation("RelatedMovies")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([title])
+  @@index([status])
+  @@index([featured])
+  @@map("movies")
+}
+
+enum SessionMovieType {
+  NORMAL
+  PREMIERE
+}
+
+enum PricingTier {
+  WEEKDAY
+  WEEKEND
+  HOLIDAY
+  STUDENT
+}
+
+model SessionMovie {
+  id             String           @id @default(uuid())
+  movieId        String
+  movie          Movie            @relation(fields: [movieId], references: [id])
+  roomId         String
+  room           Room             @relation(fields: [roomId], references: [id])
+  type           SessionMovieType @default(NORMAL)
+  tier           PricingTier      @default(WEEKDAY)
+  startTime      DateTime
+  endTime        DateTime
+  saleOpensAt    DateTime // quando a compra fica liberada para esta sessão
+  price          Int
+  sessionTickets SessionTicket[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([movieId])
+  @@index([roomId])
+  @@index([startTime])
+  @@index([saleOpensAt])
+  @@index([type])
+  @@map("session_movies")
+}
+
+// ═══════════════════════════════════════════════════
+// 4. OCUPAÇÃO DE LUGARES, PEDIDOS E BILHETES
+// ═══════════════════════════════════════════════════
+
+enum TicketStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+}
+
+model SessionTicket {
+  id             String       @id @default(uuid())
+  sessionMovieId String
+  sessionMovie   SessionMovie @relation(fields: [sessionMovieId], references: [id], onDelete: Cascade)
+  seatId         String
+  seat           Seat         @relation(fields: [seatId], references: [id])
+  status         TicketStatus @default(AVAILABLE)
+  reservedAt     DateTime?
+  reservedUntil  DateTime? // TTL do lock — passado isso, volta a AVAILABLE
+  ticket         Ticket?
+
+  updatedAt DateTime @updatedAt
+
+  @@unique([sessionMovieId, seatId])
+  @@index([status])
+  @@index([reservedUntil])
+  @@map("session_tickets")
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+model Order {
+  id            String        @id @default(uuid())
+  userId        String?
+  user          User?         @relation(fields: [userId], references: [id])
+  guestEmail    String?
+  guestWhatsapp String?
+  total         Int
+  paymentMethod String? // ex: "multicaixa_express", "unitel_money"
+  paymentRef    String?
+  paymentStatus PaymentStatus @default(PENDING)
+  tickets       Ticket[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([paymentStatus])
+  @@map("orders")
+}
+
+model Ticket {
+  id              String        @id @default(uuid())
+  orderId         String
+  order           Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  sessionTicketId String        @unique
+  sessionTicket   SessionTicket @relation(fields: [sessionTicketId], references: [id])
+  code            String        @unique // código curto, digitável manualmente na porta
+  qrToken         String        @unique // token longo, embutido no QR code
+  checkedInAt     DateTime?
+  checkedInById   String?
+  checkedInBy     User?         @relation("CheckedInBy", fields: [checkedInById], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+  @@index([code])
+  @@map("tickets")
+}
+
+// ═══════════════════════════════════════════════════
+// 5. PRÉ-VENDA (waitlist) E AVALIAÇÕES
+// ═══════════════════════════════════════════════════
+
+model PresaleSubscription {
+  id         String    @id @default(uuid())
+  movieId    String
+  movie      Movie     @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  email      String?
+  whatsapp   String?
+  notifiedAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([movieId])
+  @@index([notifiedAt])
+  @@map("presale_subscriptions")
+}
+
+model MovieReview {
+  id      String  @id @default(uuid())
+  movieId String
+  movie   Movie   @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  userId  String?
+  user    User?   @relation(fields: [userId], references: [id])
+  rating  Int // 1 a 5
+  comment String?
+
+  createdAt DateTime @default(now())
+
+  @@index([movieId])
+  @@map("movie_reviews")
+}

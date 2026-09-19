@@ -1,0 +1,14 @@
+services:
+  api:
+    build:
+      context: ./api
+      target: build
+    command: npm run dev
+    env_file: .env
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    ports:
+      - "5002:5000"

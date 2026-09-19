@@ -1,0 +1,469 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+@custom-variant a11y (&:is(.a11y *));
+
+@custom-variant dark (&:is(.dark, .dark *));
+
+@theme inline {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Black", "Space Grotesk", sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* cineIze semantic tokens (monochrome) */
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-hairline: var(--hairline);
+  --color-seat-available: var(--seat-available);
+  --color-seat-booked: var(--seat-booked);
+  --color-seat-selected: var(--seat-selected);
+  --color-seat-selected-foreground: var(--seat-selected-foreground);
+}
+
+/* ==========================================
+   DEFAULT THEME = DARK (Fundo Preto Profundo)
+   ========================================== */
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+@custom-variant a11y (&:is(.a11y *));
+
+@custom-variant dark (&:is(.dark, .dark *));
+
+@theme inline {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Black", "Space Grotesk", sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* cineIze semantic tokens (monochrome) */
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-hairline: var(--hairline);
+  --color-seat-available: var(--seat-available);
+  --color-seat-booked: var(--seat-booked);
+  --color-seat-selected: var(--seat-selected);
+  --color-seat-selected-foreground: var(--seat-selected-foreground);
+}
+
+
+/* ==========================================
+   cineIze — CINEMATIC CHARCOAL THEME
+   Escuro, sofisticado e não puramente preto
+   ========================================== */
+
+:root {
+  --radius: 0.5rem;
+
+  /* Fundo principal: carvão profundo */
+  --background: oklch(0.135 0.012 265);
+  --foreground: oklch(0.94 0.012 85);
+
+  /* Contraste invertido */
+  --paper: oklch(0.94 0.012 85);
+  --ink: oklch(0.135 0.012 265);
+
+  /* Superfícies em camadas */
+  --card: oklch(0.185 0.015 265);
+  --card-foreground: oklch(0.94 0.012 85);
+
+  --popover: oklch(0.205 0.016 265);
+  --popover-foreground: oklch(0.94 0.012 85);
+
+  /* Ações principais: marfim */
+  --primary: oklch(0.94 0.012 85);
+  --primary-foreground: oklch(0.135 0.012 265);
+
+  /* Elementos secundários */
+  --secondary: oklch(0.245 0.018 265);
+  --secondary-foreground: oklch(0.94 0.012 85);
+
+  --muted: oklch(0.22 0.015 265);
+  --muted-foreground: oklch(0.68 0.012 85);
+
+  --accent: oklch(0.285 0.02 265);
+  --accent-foreground: oklch(0.94 0.012 85);
+
+  /* Estados */
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  /* Bordas: visíveis, mas discretas */
+  --border: oklch(0.32 0.018 265);
+  --hairline: oklch(0.39 0.018 265);
+  --input: oklch(0.27 0.018 265);
+  --ring: oklch(0.94 0.012 85);
+
+  /* Assentos */
+  --seat-available: oklch(0.66 0.012 85);
+  --seat-booked: oklch(0.32 0.018 265);
+  --seat-selected: oklch(0.94 0.012 85);
+  --seat-selected-foreground: oklch(0.135 0.012 265);
+}
+
+/* ==========================================
+   LIGHT MODE
+   ========================================== */
+
+.light {
+  --background: oklch(0.965 0.008 85);
+  --foreground: oklch(0.16 0.012 265);
+
+  --paper: oklch(0.16 0.012 265);
+  --ink: oklch(0.965 0.008 85);
+
+  --card: oklch(0.99 0.004 85);
+  --card-foreground: oklch(0.16 0.012 265);
+
+  --popover: oklch(0.99 0.004 85);
+  --popover-foreground: oklch(0.16 0.012 265);
+
+  --primary: oklch(0.16 0.012 265);
+  --primary-foreground: oklch(0.965 0.008 85);
+
+  --secondary: oklch(0.91 0.012 85);
+  --secondary-foreground: oklch(0.16 0.012 265);
+
+  --muted: oklch(0.925 0.01 85);
+  --muted-foreground: oklch(0.44 0.012 265);
+
+  --accent: oklch(0.885 0.012 85);
+  --accent-foreground: oklch(0.16 0.012 265);
+
+  --border: oklch(0.84 0.012 85);
+  --hairline: oklch(0.75 0.012 85);
+  --input: oklch(0.88 0.012 85);
+  --ring: oklch(0.16 0.012 265);
+
+  --seat-available: oklch(0.58 0.012 265);
+  --seat-booked: oklch(0.84 0.012 85);
+  --seat-selected: oklch(0.16 0.012 265);
+  --seat-selected-foreground: oklch(0.965 0.008 85);
+}
+
+/* ==========================================
+   ACCESSIBILITY — contraste suavizado
+   ========================================== */
+
+.autism-friendly {
+  --background: oklch(0.18 0.012 265);
+  --foreground: oklch(0.90 0.012 85);
+  --card: oklch(0.22 0.015 265);
+  --muted-foreground: oklch(0.72 0.012 85);
+}
+
+.light.autism-friendly {
+  --background: oklch(0.94 0.008 85);
+  --foreground: oklch(0.20 0.012 265);
+  --card: oklch(0.97 0.006 85);
+}
+
+/* ==========================================
+   ESTILOS BASE
+   ========================================== */
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  :where(a, button, [role="button"], input, select, textarea):focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* ==========================================
+   cineIze — SUPERFÍCIES
+   ========================================== */
+
+/* Cards: profundidade sem sombra pesada */
+@utility cinema-surface {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* Sessões: elevação subtil */
+@utility session-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  transition:
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-hairline);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* ==========================================
+   UTILITÁRIOS cineIze
+   Mantidos para compatibilidade
+   ========================================== */
+
+@utility dotted-frame {
+  background-image:
+    radial-gradient(circle, currentColor 1.5px, transparent 1.6px),
+    radial-gradient(circle, currentColor 1.5px, transparent 1.6px);
+  background-size: 14px 3px, 14px 3px;
+  background-position: top center, bottom center;
+  background-repeat: repeat-x;
+  padding-block: 12px;
+}
+
+@utility dotted-x {
+  background-image: radial-gradient(circle, currentColor 1.4px, transparent 1.5px);
+  background-size: 12px 3px;
+  background-repeat: repeat-x;
+  background-position: center;
+  height: 3px;
+  width: 100%;
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+@utility marquee-dots {
+  background-image: radial-gradient(circle, currentColor 1.4px, transparent 1.5px);
+  background-size: 12px 3px;
+  background-repeat: repeat-x;
+  animation: marquee-shift 6s linear infinite;
+}
+
+@keyframes marquee-shift {
+  from { background-position: 0 center; }
+  to { background-position: 240px center; }
+}
+
+@keyframes cine-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.04); opacity: 0.85; }
+}
+
+@utility animate-cine-pulse {
+  animation: cine-pulse 1.6s ease-in-out infinite;
+}
+
+/* ==========================================
+   ASSENTOS
+   ========================================== */
+
+@utility seat {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px 6px 3px 3px;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  line-height: 1;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+@utility seat-available {
+  background: transparent;
+  border: 1.5px solid var(--color-seat-available);
+  color: var(--color-seat-available);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-foreground);
+    color: var(--color-foreground);
+    transform: translateY(-1px);
+  }
+}
+
+@utility seat-booked {
+  background: var(--color-seat-booked);
+  color: transparent;
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@utility seat-selected {
+  background: var(--color-seat-selected);
+  color: var(--color-seat-selected-foreground);
+  border: 1.5px solid var(--color-seat-selected);
+  font-weight: 700;
+}
+
+/* ==========================================
+   PRÉ-ESTREIA — único destaque de cor
+   ========================================== */
+
+@keyframes pre-estreia-shimmer {
+  0%, 100% {
+    border-color: #b8860b;
+    box-shadow: 0 0 8px rgba(218, 165, 32, 0.18);
+  }
+
+  50% {
+    border-color: #d4a72c;
+    box-shadow: 0 0 14px rgba(218, 165, 32, 0.28);
+  }
+}
+
+.movie-card-pre-estreia {
+  border-color: #daa520;
+  animation: pre-estreia-shimmer 2.5s ease-in-out infinite;
+}
+
+/* ==========================================
+   CINEMA SCREEN
+   ========================================== */
+
+@utility cinema-screen {
+  width: 80%;
+  max-width: 500px;
+  height: 6px;
+  margin: 0 auto 2rem;
+  background: var(--color-foreground);
+  opacity: 0.25;
+  border-radius: 0 0 50% 50%;
+  box-shadow: 0 4px 24px rgba(255, 255, 255, 0.04);
+}
+
+/* ==========================================
+   MODAIS
+   ========================================== */
+
+@utility modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 14, 0.78);
+  backdrop-filter: blur(8px);
+  z-index: 50;
+  display: grid;
+  place-items: center;
+}
+
+@utility modal-panel {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 51;
+}
+
+@keyframes modal-enter {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@utility modal-animate {
+  animation: modal-enter 0.25s ease-out;
+}
+
+/* ==========================================
+   DISABLED / REDUÇÃO DE MOVIMENTO
+   ========================================== */
+
+@utility cinema-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(0.6);
+}
+
+.autism-friendly *,
+.autism-friendly *::before,
+.autism-friendly *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+@utility dot-divider {
+  background-image: radial-gradient(circle, var(--color-foreground) 1.5px, transparent 1.5px);
+  background-size: 12px 12px;
+  background-repeat: repeat-x;
+  background-position: center;
+  height: 12px;
+  width: 100%;
+}
+
+@utility dot-loader {
+  background-image: radial-gradient(circle, var(--color-foreground) 2px, transparent 2px);
+  background-size: 14px 14px;
+  animation: dot-slide 1.2s linear infinite;
+}
