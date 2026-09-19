@@ -111,7 +111,7 @@ export function HeaderMovie({ movie, lang }: HeaderMovieProps) {
             <div
               className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold border backdrop-blur-md ${movieState.badgeClass}`}
             >
-              <StateIcon className="h-3.5 w-3.5" />
+              {/* <StateIcon className="h-3.5 w-3.5" /> */}
               <span>{movieState.label}</span>
             </div>
 

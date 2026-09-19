@@ -80,7 +80,7 @@ export function CineizeTicket({
               <div className="text-center border-b-2 border-dashed border-black pb-4 mb-4">
                 <div className="flex justify-center items-center space-x-1 mb-1">
                   <span className="text-2xl font-black tracking-tighter uppercase font-sans">
-                    CINE<span className="text-zinc-900">MAX</span>
+                    CINE<span className="text-zinc-900">IZE</span>
                   </span>
                 </div>
                 <p className="text-xs font-bold tracking-wider font-sans uppercase text-slate-800">
