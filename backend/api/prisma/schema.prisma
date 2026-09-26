@@ -1,0 +1,424 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ═══════════════════════════════════════════════════
+// USER
+// ═══════════════════════════════════════════════════
+
+model User {
+  id            String  @id @default(uuid())
+  email         String  @unique
+  name          String
+  emailVerified Boolean @default(false)
+  image         String?
+  passwordHash  String?
+
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  deletedAt         DateTime?
+  sessions          Session[]
+  accounts          Account[]
+  oauthApplications OauthApplication[]
+  oauthAccessTokens OauthAccessToken[]
+  oauthConsents     OauthConsent[]
+  cinema            Cinema?            @relation(fields: [cinemaId], references: [id])
+  cinemaId          Int?
+
+  @@map("users")
+}
+
+// ═══════════════════════════════════════════════════
+// BETTER AUTH
+// ═══════════════════════════════════════════════════
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model OauthApplication {
+  id                String             @id
+  name              String
+  icon              String?
+  metadata          String?
+  clientId          String
+  clientSecret      String?
+  redirectUrls      String
+  type              String
+  disabled          Boolean?           @default(false)
+  userId            String?
+  user              User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime
+  updatedAt         DateTime
+  oauthaccesstokens OauthAccessToken[]
+  oauthconsents     OauthConsent[]
+
+  @@unique([clientId])
+  @@index([userId])
+  @@map("oauthApplication")
+}
+
+model OauthAccessToken {
+  id                    String           @id
+  accessToken           String
+  refreshToken          String
+  accessTokenExpiresAt  DateTime
+  refreshTokenExpiresAt DateTime
+  clientId              String
+  oauthapplication      OauthApplication @relation(fields: [clientId], references: [clientId], onDelete: Cascade)
+  userId                String?
+  user                  User?            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scopes                String
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@unique([accessToken])
+  @@unique([refreshToken])
+  @@index([clientId])
+  @@index([userId])
+  @@map("oauthAccessToken")
+}
+
+model OauthConsent {
+  id               String           @id
+  clientId         String
+  oauthapplication OauthApplication @relation(fields: [clientId], references: [clientId], onDelete: Cascade)
+  userId           String
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scopes           String
+  createdAt        DateTime
+  updatedAt        DateTime
+  consentGiven     Boolean
+
+  @@index([clientId])
+  @@index([userId])
+  @@map("oauthConsent")
+}
+
+// ============================================================================
+// LAYER 1: GEOGRAPHY
+// ============================================================================
+
+model Location {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  province  String   @db.VarChar(100)
+  country   String   @default("Angola") @db.VarChar(100)
+  latitude  Decimal  @db.Decimal(10, 8)
+  longitude Decimal  @db.Decimal(11, 8)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cinemas Cinema[]
+
+  @@unique([name, province])
+  @@index([active])
+}
+
+// ============================================================================
+// LAYER 2: INFRASTRUCTURE
+// ============================================================================
+
+model Cinema {
+  id          Int      @id @default(autoincrement())
+  locationId  Int
+  location    Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  name        String   @db.VarChar(150)
+  slug        String   @unique @db.VarChar(150)
+  description String?  @db.Text
+  address     String   @db.VarChar(255)
+  latitude    Decimal  @db.Decimal(10, 8)
+  longitude   Decimal  @db.Decimal(11, 8)
+  phone       String?  @db.VarChar(20)
+  email       String?  @db.VarChar(100)
+  website     String?  @db.VarChar(255)
+  images      String[]
+  bannerUrl   String?  @db.VarChar(500)
+  openTime    DateTime @db.Time
+  closeTime   DateTime @db.Time
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users User[]
+  halls Hall[]
+
+  @@index([locationId])
+  @@index([active])
+}
+
+// ============================================================================
+// LAYER 3: CONTENT
+// ============================================================================
+enum AgeRating {
+  G
+  PG
+  PG13
+  RATED12
+  RATED14
+  RATED16
+  RATED18
+}
+
+model Movie {
+  id              Int            @id @default(autoincrement())
+  title           String         @db.VarChar(255)
+  slug            String         @unique @db.VarChar(255)
+  synopsis        String         @db.Text
+  durationMinutes Int
+  genres          String[]
+  ageRating       AgeRating
+  director        String?        @db.VarChar(150)
+  cast            String[]
+  worldLaunchDate DateTime?      @db.Date
+  basePrice       Decimal        @db.Decimal(10, 2)
+  posterUrl       String?        @db.VarChar(500)
+  backdropUrl     String?        @db.VarChar(500)
+  trailerUrl      String?        @db.VarChar(500)
+  active          Boolean        @default(true)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  exhibitions     Exhibition[]
+  sessionMovies   SessionMovie[]
+
+  @@index([active])
+  @@index([ageRating])
+}
+
+model Hall {
+  id        Int      @id @default(autoincrement())
+  cinemaId  Int
+  cinema    Cinema   @relation(fields: [cinemaId], references: [id], onDelete: Cascade)
+  number    Int
+  name      String   @db.VarChar(100)
+  format    Format
+  capacity  Int
+  images    String[]
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  seats    Seat[]
+  sessions SessionMovie[]
+
+  @@unique([cinemaId, number])
+  @@index([cinemaId])
+  @@index([format])
+}
+
+model Seat {
+  id        Int      @id @default(autoincrement())
+  hallId    Int
+  hall      Hall     @relation(fields: [hallId], references: [id], onDelete: Cascade)
+  row       String   @db.Char(1)
+  number    Int
+  seatType  SeatType @default(NORMAL)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([hallId, row, number])
+  @@index([hallId])
+}
+
+// ============================================================================
+// LAYER 4: EXHIBITIONS
+// ============================================================================
+
+model Exhibition {
+  id          Int            @id @default(autoincrement())
+  movieId     Int
+  movie       Movie          @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  type        ExhibitionType
+  name        String         @db.VarChar(150)
+  slug        String         @db.VarChar(150)
+  description String?        @db.Text
+  startDate   DateTime       @db.Date
+  endDate     DateTime?      @db.Date
+  active      Boolean        @default(true)
+  createdBy   Int?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  sessions SessionMovie[]
+
+  @@unique([movieId, type, startDate])
+  @@index([movieId])
+  @@index([type])
+  @@index([active])
+  @@index([startDate])
+}
+
+// ============================================================================
+// LAYER 5: SESSIONS & TICKETS
+// ============================================================================
+
+model SessionMovie {
+  id               Int          @id @default(autoincrement())
+  movieId          Int
+  movie            Movie        @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  hallId           Int
+  hall             Hall         @relation(fields: [hallId], references: [id], onDelete: Cascade)
+  exhibitionId     Int?
+  exhibition       Exhibition?  @relation(fields: [exhibitionId], references: [id], onDelete: SetNull)
+  startDateTime    DateTime
+  price            Decimal      @db.Decimal(10, 2)
+  sessionType      SessionType
+  capacity         Int
+  currentOccupancy Int          @default(0)
+  state            SessionState @default(AVAILABLE)
+  active           Boolean      @default(true)
+  createdBy        Int?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@unique([hallId, startDateTime])
+  @@index([movieId])
+  @@index([hallId])
+  @@index([exhibitionId])
+  @@index([startDateTime])
+  @@index([active])
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+enum Format {
+  TWOD
+  THREED
+  FOURD
+  MAX
+}
+
+enum SeatType {
+  NORMAL
+  VIP
+  ACCESSIBILITY
+}
+
+enum ExhibitionType {
+  PRE_SALE
+  REGULAR_SCREENING
+  RERUN
+  SPECIAL
+  IMAX_EXCLUSIVE
+  LIVE_EVENT
+}
+
+enum SessionType {
+  PRE_SALE
+  NORMAL
+}
+
+enum SessionState {
+  AVAILABLE
+  SOLD_OUT
+  CANCELED
+}
+
+enum TicketState {
+  RESERVED
+  CONFIRMED
+  VALIDATED
+  CANCELED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  PAY_RURAL
+  PIX
+}
+
+enum NotificationMethod {
+  EMAIL
+  WHATSAPP
+  SMS
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  PARTIAL
+  ERROR
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+enum Role {
+  SUPER_ADMIN
+  CINEMA_MANAGER
+  CASHIER
+  VIEWER
+}
+
+enum Operation {
+  CREATE
+  UPDATE
+  DELETE
+}

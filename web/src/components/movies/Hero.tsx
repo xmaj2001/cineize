@@ -16,7 +16,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getMoviesFormat } from "./utiles";
-import { ApiMovie } from "@/lib/features/movies";
+import { ApiMovie } from "@/lib/features/moviesss";
 import { TrailerModal } from "./TrailerModal";
 
 // Importando os dados e tipos fornecidos

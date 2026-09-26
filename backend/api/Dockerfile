@@ -1,6 +1,7 @@
 # Define a versão do Node num único lugar
 ARG NODE_IMAGE=node:22-alpine
 
+# ---- deps: instala tudo pra poder buildar ----
 FROM ${NODE_IMAGE} AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
@@ -32,9 +33,9 @@ COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/prisma ./prisma
 COPY entrypoint.sh ./
-RUN chmod 755 entrypoint.sh && addgroup -S nest && adduser -S nest -G nest
+RUN chmod +x entrypoint.sh && addgroup -S nest && adduser -S nest -G nest
 USER nest
 
-EXPOSE 5000
+EXPOSE 3000
 ENTRYPOINT ["/sbin/tini", "--", "./entrypoint.sh"]
 CMD ["node", "dist/main.js"]

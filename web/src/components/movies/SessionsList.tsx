@@ -3,7 +3,7 @@
 import { Zap, Clock, MapPin } from "lucide-react";
 import Link from "next/link";
 import { FORMAT_MAP } from "@/components/movies/utiles";
-import { ApiSessionMovie, SessionType } from "@/lib/features/movies";
+import { ApiSessionMovie, SessionType } from "@/lib/features/moviesss";
 import { formatPrice } from "@/lib/utils";
 
 import { getDictionary } from "@/app/lib/dictionaries";

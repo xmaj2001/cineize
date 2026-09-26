@@ -4,7 +4,7 @@ import { NowShowingSection } from "@/components/feeds/NowShowingSection";
 import { PreSaleSection } from "@/components/feeds/PreSaleSection";
 import { JsonLd } from "@/components/JsonLd";
 import { Hero } from "@/components/movies/Hero";
-import { movieService } from "@/lib/features/movies";
+import { movieService } from "@/lib/features/moviesss";
 import { Metadata } from "next";
 
 interface pageProps {

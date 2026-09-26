@@ -44,7 +44,11 @@
     "now_showing": "Em Cartaz",
     "pre_sale": "Pré-Venda",
     "coming_soon": "Em Breve",
-    "view_all": "Ver Todos"
+    "view_all": "Ver Todos",
+    "feedcarditem": {
+      "pre_premiere": "Pré-Estreia",
+      "click_to_select": "Clique para selecionar este horário e escolher assentos"
+    }
   },
   "movies": {
     "page": {
@@ -141,6 +145,9 @@
         "STUDENT": "Estudante"
       }
     }
+  },
+  "feedcarditem": {
+
   },
   "sessions": {
     "header": {

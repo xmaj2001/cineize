@@ -1,0 +1,133 @@
+@baseUrl = http://localhost:5000/v1
+@email = dev@cloudbase.com
+@password = SenhaSegura123!
+
+### 1. Criar Utilizador (Sign Up)
+# @name signUp
+POST {{baseUrl}}/auth/sign-up
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}",
+  "name": "Developer CloudBase"
+}
+
+###
+
+### 2. Fazer Login (Sign In)
+# @name signIn
+POST {{baseUrl}}/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+### Capturar o Token da Sessão
+@authToken = {{signIn.response.body.data.token}}
+@userId = {{signIn.response.body.data.user.id}}
+
+###
+
+### 3. Obter Sessão Atual (Me)
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{authToken}}
+
+
+### 4. Criar Provider (Google Drive)
+# @name createGoogleDrive
+POST {{baseUrl}}/providers
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "type": "GOOGLE_DRIVE",
+  "displayName": "Meu Drive Principal",
+  "priority": 1,
+  "credentials": {
+    "accessToken": "ya29.a0_token_exemplo",
+    "refreshToken": "1//0g_refresh_exemplo",
+    "expiresAt": "2026-08-27T12:12:42.198Z",
+    "accountEmail": "dev@cloudbase.com",
+    "accountId": "123456789"
+  }
+}
+
+### Extrai o ID do Provider Criado
+@createdProviderId = {{createGoogleDrive.response.body.data.id}}
+
+###
+
+### 5. Criar Provider (Telegram Bot)
+POST {{baseUrl}}/providers
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "type": "TELEGRAM",
+  "displayName": "Canal de Storage Telegram",
+  "priority": 0,
+  "credentials": {
+    "botToken": "123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ",
+    "chatId": "-1001234567890"
+  }
+}
+
+###
+
+### 6. Listar Providers
+GET {{baseUrl}}/providers
+Authorization: Bearer {{authToken}}
+
+###
+
+### 7. Obter Credenciais do Provider Criado
+GET {{baseUrl}}/providers/{{createdProviderId}}/credentials
+Authorization: Bearer {{authToken}}
+
+
+###
+
+### 6. Gerar Plano de Upload (Testar Algoritmo FFD e Fragmentação)
+POST {{baseUrl}}/plans
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "files": [
+    {
+      "name": "filme_4k.zip",
+      "extension": "zip",
+      "sizeBytes":7516192768
+    },
+    {
+      "name": "jogo.exe",
+      "extension": "exe",
+      "sizeBytes":8516192768
+    }
+  ]
+}
+
+###
+
+### 7. Gerar Plano Selecionando Providers Específicos
+POST {{baseUrl}}/plans
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "files": [
+    {
+      "name": "backup_dados.zip",
+      "extension": "zip",
+      "sizeBytes": 2147483648
+    }
+  ],
+  "providers": [
+    {
+      "id": "uuid-do-provider-1"
+    }
+  ]
+}

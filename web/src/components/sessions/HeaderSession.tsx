@@ -13,7 +13,7 @@ import {
   Ticket,
 } from "lucide-react";
 import { ApiSessionDetail } from "@/lib/features/sessions";
-import { SessionType } from "@/lib/features/movies";
+import { SessionType } from "@/lib/features/moviesss";
 import { formatPrice } from "@/lib/utils";
 import { useLocations } from "@/lib/features/locations/hooks/use-locations";
 

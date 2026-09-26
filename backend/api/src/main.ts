@@ -6,6 +6,7 @@ import { NestExpressApplication } from "@nestjs/platform-express";
 import cookieParser from "cookie-parser";
 import { AppValidationPipe } from "./shared/common/pipes/validation.pipe";
 import { HttpExceptionFilter } from "./shared/common/filters/http-exception.filter";
+import { BigIntInterceptor } from "./shared/common/interceptors/bigint.interceptor";
 import { ResponseInterceptor } from "./shared/common/interceptors/response.interceptor";
 import { VersioningType } from "@nestjs/common";
 
@@ -13,6 +14,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     // bodyParser: false, // Required for Better Auth
   });
+
   app.enableVersioning({
     type: VersioningType.URI,
   });
@@ -20,6 +22,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new AppValidationPipe({}, false));
   // app.useWebSocketAdapter(new IoAdapter(app));
+  app.useGlobalInterceptors(new BigIntInterceptor());
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter(false));
   // ── Swagger ─────────────────────────────────────────────────────────────────

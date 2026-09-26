@@ -44,7 +44,11 @@
     "now_showing": "Now Showing",
     "pre_sale": "Pre-Sale",
     "coming_soon": "Coming Soon",
-    "view_all": "View All"
+    "view_all": "View All",
+    "feedcarditem": {
+      "pre_premiere": "Pre-Premiere",
+      "click_to_select": "Click to select this time and pick seats"
+    }
   },
   "movies": {
     "page": {

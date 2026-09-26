@@ -1,6 +1,5 @@
 import { getDictionary, Locale } from "@/app/lib/dictionaries";
-import { MovieList } from "@/components/movies/MovieList";
-import { movieService } from "@/lib/features/movies";
+import { InfiniteMoviesFeed } from "@/lib/features/feeds/components/infinite-movies-feed";
 import { Film } from "lucide-react";
 import { Metadata } from "next";
 
@@ -32,66 +31,60 @@ export default async function MoviesPage({
   const resolvedSearchParams = await searchParams;
   const dict = getDictionary(lang);
 
-  const search =
-    typeof resolvedSearchParams?.search === "string"
-      ? resolvedSearchParams.search
-      : undefined;
-  const urlStatus =
-    typeof resolvedSearchParams?.status === "string"
-      ? resolvedSearchParams.status
-      : "todos";
-  const format =
-    typeof resolvedSearchParams?.format === "string"
-      ? resolvedSearchParams.format
-      : "todos";
-  const locationId =
-    typeof resolvedSearchParams?.locationId === "string"
-      ? resolvedSearchParams.locationId
-      : undefined;
+  // const search =
+  //   typeof resolvedSearchParams?.search === "string"
+  //     ? resolvedSearchParams.search
+  //     : undefined;
+  // const urlStatus =
+  //   typeof resolvedSearchParams?.status === "string"
+  //     ? resolvedSearchParams.status
+  //     : "todos";
+  // const format =
+  //   typeof resolvedSearchParams?.format === "string"
+  //     ? resolvedSearchParams.format
+  //     : "todos";
+  // const locationId =
+  //   typeof resolvedSearchParams?.locationId === "string"
+  //     ? resolvedSearchParams.locationId
+  //     : undefined;
 
-  let apiStatus: string | undefined = undefined;
-  if (urlStatus === "em-cartaz") apiStatus = "nowShowing";
-  else if (urlStatus === "pre-venda") apiStatus = "presale";
-  else if (urlStatus === "brevemente") apiStatus = "comingSoon";
+  // let apiStatus: string | undefined = undefined;
+  // if (urlStatus === "em-cartaz") apiStatus = "nowShowing";
+  // else if (urlStatus === "pre-venda") apiStatus = "presale";
+  // else if (urlStatus === "brevemente") apiStatus = "comingSoon";
 
-  let initialPage = undefined;
-  try {
-    initialPage = await movieService.getMovies({
-      search: search || undefined,
-      status: apiStatus,
-      format: format !== "todos" ? format : undefined,
-      locationId: locationId,
-      limit: 10,
-    });
-  } catch (e) {
-    console.error("Falha ao carregar initialPage no servidor", e);
-  }
+  // let initialPage = undefined;
+  // try {
+  //   initialPage = await movieService.getMovies({
+  //     search: search || undefined,
+  //     status: apiStatus,
+  //     format: format !== "todos" ? format : undefined,
+  //     locationId: locationId,
+  //     limit: 10,
+  //   });
+  // } catch (e) {
+  //   console.error("Falha ao carregar initialPage no servidor", e);
+  // }
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Filmes em exibição - cineIze",
-    itemListElement:
-      initialPage?.data?.items?.map((movie, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        item: {
-          "@type": "Movie",
-          url: `https://www.cineize.co.ao/${lang}/movies/${movie.id}`,
-          name: movie.title,
-          image: movie.posterUrl,
-        },
-      })) || [],
-  };
+  // const jsonLd = {
+  //   "@context": "https://schema.org",
+  //   "@type": "ItemList",
+  //   name: "Filmes em exibição - cineIze",
+  //   itemListElement:
+  //     initialPage?.data?.items?.map((movie, index) => ({
+  //       "@type": "ListItem",
+  //       position: index + 1,
+  //       item: {
+  //         "@type": "Movie",
+  //         url: `https://www.cineize.co.ao/${lang}/movies/${movie.id}`,
+  //         name: movie.title,
+  //         image: movie.posterUrl,
+  //       },
+  //     })) || [],
+  // };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
-      <main className="px-4 py-8 md:px-8 max-w-7xl mx-auto mt-24 flex flex-col gap-10">
+    <main className="px-4 py-8 md:px-8 max-w-7xl mx-auto mt-24 flex flex-col gap-10">
         {/* 1. Header da Página */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
@@ -109,8 +102,8 @@ export default async function MoviesPage({
             </p>
           </div>
         </div>
-        <MovieList lang={lang} initialPage={initialPage} />
+        {/* <MovieList lang={lang} initialPage={initialPage} /> */}
+        <InfiniteMoviesFeed lang={lang} dict={dict} />
       </main>
-    </>
   );
 }

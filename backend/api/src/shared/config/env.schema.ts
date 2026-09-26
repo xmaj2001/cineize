@@ -6,9 +6,6 @@ export const envSchema = z.object({
 
   // Databases & Cache
   DATABASE_URL: z.string(),
-  DB_USER: z.string().min(1),
-  DB_NAME: z.string().min(1),
-  DB_PASSWORD: z.string().min(1),
   REDIS_URL: z.string(),
 
   // Better Auth Configuration

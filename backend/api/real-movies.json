@@ -1,0 +1,518 @@
+[
+  {
+    "title": "Divertida-Mente 2 (Inside Out 2)",
+    "originalTitle": "Inside Out 2",
+    "synopsis": "Na mente de Riley, recém-chegada à adolescência, o Quartel General é alvo de uma demolição súbita para dar espaço a algo totalmente inesperado: novas Emoções! A Alegria, a Tristeza, a Raiva, o Medo e a Repulsa, que têm feito, sem dúvida, uma boa gestão, não sabem como reagir à chegada da Ansiedade. E parece que ela não veio sozinha.",
+    "genres": [
+      "Animação",
+      "Aventura",
+      "Comédia",
+      "Família"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Kelsey Mann",
+    "cast": [
+      "Amy Poehler",
+      "Maya Hawke",
+      "Kensington Tallman"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/xGvz7nlGQeePcVOpAzOcHsC7kRt.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=u69y5Ie519M",
+    "tmdbId": 1022789,
+    "durationMin": 96,
+    "ageRating": "M/M/6",
+    "featured": true,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Deadpool & Wolverine",
+    "originalTitle": "Deadpool & Wolverine",
+    "synopsis": "Wade Wilson leva uma vida tranquila e deixou para trás o trabalho de mercenário até ser arrastado para uma nova missão pelo Agente Paradox, da organização exterior ao tempo e ao espaço, que monitoriza a linha cronológica. Com o universo em que habita em risco de extinção, um relutante Wilson associa-se a um ainda mais relutante Wolverine numa missão capaz de alterar a história do Universo Cinematográfico Marvel. O inimigo comum é Cassandra Nova, a maléfica irmã gémea do Professor Charles Xavier, que representa uma ameaça para o multiverso.",
+    "genres": [
+      "Ação",
+      "Comédia",
+      "Ficção científica"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Shawn Levy",
+    "cast": [
+      "Ryan Reynolds",
+      "Hugh Jackman",
+      "Emma Corrin"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/xq4v7JE8niZ75OYYPDGNn6Gzpyt.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=Idh8n5XuYIA",
+    "tmdbId": 533535,
+    "durationMin": 128,
+    "ageRating": "M/M/14",
+    "featured": true,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Gladiador II",
+    "originalTitle": "Gladiator II",
+    "synopsis": "Anos depois de testemunhar a morte do venerado herói Máximus às mãos do seu tio, Lúcius é forçado a entrar no Coliseu depois de a sua casa ter sido conquistada pelos imperadores tirânicos que agora lideram Roma com mão de ferro. Com a raiva no coração e o futuro do Império em jogo, Lúcius tem de olhar para o seu passado para encontrar força e honra para devolver a glória de Roma ao seu povo.",
+    "genres": [
+      "Ação",
+      "Aventura",
+      "Drama"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Ridley Scott",
+    "cast": [
+      "Paul Mescal",
+      "Denzel Washington",
+      "Pedro Pascal"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/342bly9MqveL65TnEFzx8TTUxcL.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/tOqIwliWMovSIZ9DyvHcHI7p2im.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=TQwSz88ITAE",
+    "tmdbId": 558449,
+    "durationMin": 148,
+    "ageRating": "M/M/16",
+    "featured": true,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Vaiana 2",
+    "originalTitle": "Moana 2",
+    "synopsis": "Depois de receber uma chamada inesperada dos seus antepassados, Vaiana viaja ao lado de Maui e de uma nova tripulação para os mares longínquos da Oceânia e para as águas perigosas e há muito perdidas, numa aventura diferente de tudo o que alguma vez enfrentou.",
+    "genres": [
+      "Aventura",
+      "Animação",
+      "Comédia",
+      "Família",
+      "Fantasia"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "David G. Derrick Jr.",
+    "cast": [
+      "Auliʻi Cravalho",
+      "Dwayne Johnson",
+      "Hualālai Chung"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/A1NUWVjoKzWzOdGE01NHquyubkx.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/vYqt6kb4lcF8wwqsMMaULkP9OEn.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=JdSl4RMNtGE",
+    "tmdbId": 1241982,
+    "durationMin": 101,
+    "ageRating": "M/M/6",
+    "featured": true,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Joker: Loucura a Dois",
+    "originalTitle": "Joker: Folie à Deux",
+    "synopsis": "Acompanha a crescente loucura de Arthur Fleck, agora envolvido numa relação obsessiva com Harley Quinn. A história mergulha na mente perturbada de ambos, explorando a sua ligação e como ambos abraçam o caos e a violência, num mundo que parece rejeitá-los. O filme combina drama psicológico com momentos musicais intensos.",
+    "genres": [
+      "Drama",
+      "Crime",
+      "Thriller"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Todd Phillips",
+    "cast": [
+      "Joaquin Phoenix",
+      "Lady Gaga",
+      "Brendan Gleeson"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/jNttwl5CYgnxNwQ8157BxyYJqu2.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/AVWlQpVhpudyFsSh3OQIieHHYf.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=fiqqAI0e4Nc",
+    "tmdbId": 889737,
+    "durationMin": 132,
+    "ageRating": "M/M/14",
+    "featured": true,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "O Reino do Planeta dos Macacos",
+    "originalTitle": "Kingdom of the Planet of the Apes",
+    "synopsis": "No futuro, várias gerações após o reinado de César, onde os macacos são a espécie dominante que vive harmoniosamente e os humanos foram reduzidos a viver nas sombras. À medida que um novo líder primata tirano constrói o seu império, um jovem macaco inicia uma jornada angustiante que o levará a questionar tudo o que sabe sobre o passado e a fazer escolhas que irão definir o futuro dos macacos e dos humanos.",
+    "genres": [
+      "Ficção científica",
+      "Aventura",
+      "Ação"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Wes Ball",
+    "cast": [
+      "Owen Teague",
+      "Freya Allan",
+      "Kevin Durand"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/uXjbKJ57H30YrOQx5GfXoGvnsGY.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/fypydCipcWDKDTTCoPucBsdGYXW.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=Tg1FesR8X90",
+    "tmdbId": 653346,
+    "durationMin": 145,
+    "ageRating": "M/M/12",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "O Panda do Kung Fu 4",
+    "originalTitle": "Kung Fu Panda 4",
+    "synopsis": "Após três aventuras perigosíssimas em que derrotou vilões de classe mundial com a sua incomparável coragem e perícia em artes marciais, Po, o Guerreiro Dragão, é chamado pelo destino para... finalmente descansar. Mais especificamente, é escolhido para se tornar o Líder Espiritual do Vale da Paz. Isso levanta alguns problemas óbvios. Primeiro, Po sabe tanto sobre liderança espiritual quanto sabe sobre perder uns quilos, e segundo, ele precisa rapidamente encontrar e treinar um novo Guerreiro Dragão antes de assumir a sua nova posição elevada.",
+    "genres": [
+      "Ação",
+      "Aventura",
+      "Animação",
+      "Comédia",
+      "Família",
+      "Fantasia"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Mike Mitchell",
+    "cast": [
+      "Jack Black",
+      "Awkwafina",
+      "Viola Davis"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/vU5MZaZfdl6P7SRHGjpWYiNYa1t.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/3ffPx9jqg0yj9y1KWeagT7D20CB.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=cEAxQE9Xqdg",
+    "tmdbId": 1011985,
+    "durationMin": 94,
+    "ageRating": "M/M/6",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Godzilla x Kong: O Novo Império",
+    "originalTitle": "Godzilla x Kong: The New Empire",
+    "synopsis": "Uma nova e emocionante aventura coloca o poderoso Kong e o temível Godzilla contra uma ameaça colossal e desconhecida, oculta dentro do nosso mundo, desafiando a própria existência deles – e a nossa também. \"Godzilla X Kong: O Novo Império\" aprofunda-se ainda mais as histórias desses Titãs e as suas origens, assim como nos mistérios da Ilha da Caveira e além, revelando a batalha mítica que ajudou a forjar esses seres extraordinários e os vinculou para sempre à humanidade.",
+    "genres": [
+      "Ação",
+      "Aventura",
+      "Ficção científica"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Adam Wingard",
+    "cast": [
+      "Rebecca Hall",
+      "Brian Tyree Henry",
+      "Dan Stevens"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/fWSGD2yrzz6hscocnMD8AEXIThk.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/gvLG3Fnznkxl4SmYfcK8gUuqxM8.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=m2u6RfmTXt0",
+    "tmdbId": 823464,
+    "durationMin": 115,
+    "ageRating": "M/M/14",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Wicked",
+    "originalTitle": "Wicked",
+    "synopsis": "A história é contada segundo a perspectiva de Elphaba, que mais tarde será conhecida como a Bruxa Má do Oeste, e Glinda, a futura Bruxa Boa do Sul. Muito antes da chegada da jovem Dorothy ao mundo de Oz, ficamos a conhecer as duas feiticeiras, quando, ainda raparigas, eram colegas de quarto na Universidade de Shiz. Apesar de um início de relação algo atribulado, as duas acabam por se tornar aliadas na luta contra a tirania do Feiticeiro de Oz.",
+    "genres": [
+      "Drama",
+      "Romance",
+      "Fantasia"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Jon M. Chu",
+    "cast": [
+      "Cynthia Erivo",
+      "Ariana Grande",
+      "Michelle Yeoh"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/qcaKkLwIXCAxJtpetVYHniCvLZj.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/fyZ6SDUS4o9jp2EHxfZa3qS9ean.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=pqi45Qhq3CI",
+    "tmdbId": 402431,
+    "durationMin": 162,
+    "ageRating": "M/PG",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Venom: A Última Dança",
+    "originalTitle": "Venom: The Last Dance",
+    "synopsis": "Eddie e Venom estão em fuga. Perseguidos pelos seus dois mundos e com o cerco a apertar, a dupla é forçada a tomar uma decisão devastadora que resultará na última dança de ambos.",
+    "genres": [
+      "Ficção científica",
+      "Ação",
+      "Aventura"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Kelly Marcel",
+    "cast": [
+      "Tom Hardy",
+      "Chiwetel Ejiofor",
+      "Juno Temple"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/p8CHaGudwUzBSU7dTjzMd71Iv4M.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=FKBN1qAzW3s",
+    "tmdbId": 912649,
+    "durationMin": 110,
+    "ageRating": "M/M/12",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Alien: Romulus",
+    "originalTitle": "Alien: Romulus",
+    "synopsis": "Enquanto vasculham uma estação espacial abandonada, um grupo de jovens colonizadores depara-se com a forma de vida mais aterradora do universo.",
+    "genres": [
+      "Terror",
+      "Ficção científica"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Fede Álvarez",
+    "cast": [
+      "Cailee Spaeny",
+      "David Jonsson",
+      "Archie Renaux"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/6rr7r6cMWMYlgJFBGyPkSHEBDkk.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/iYqSQaWDttQIQzsxg9xHyg0bttG.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=x0XDEhP4MQs",
+    "tmdbId": 945961,
+    "durationMin": 119,
+    "ageRating": "M/M/16",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Beetlejuice Beetlejuice",
+    "originalTitle": "Beetlejuice Beetlejuice",
+    "synopsis": "Após uma tragédia familiar inesperada, três gerações da familia Deetz regressam à casa em Winter River. Astrid, a filha rebelde de Lydia, vai ao sótão e descobre o misterioso modelo da cidade. Sem querer, reabre o portal para o mundo dos mortos. Depois, é apenas uma questão de tempo até o nome de Beetlejuice ser proferido três vezes, fazendo o demónio regressar para acrescentar caos à já complicada vida de Lydia.",
+    "genres": [
+      "Comédia",
+      "Fantasia"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Tim Burton",
+    "cast": [
+      "Michael Keaton",
+      "Winona Ryder",
+      "Catherine O'Hara"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/7BdhGumI15meWIKIOm1LVoW64NS.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/kF8ljC7Y4p1UsmKBi2LxelZpqw.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=RRkE3OT76mY",
+    "tmdbId": 917496,
+    "durationMin": 105,
+    "ageRating": "M/M/12",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Furiosa: Uma Saga Mad Max",
+    "originalTitle": "Furiosa: A Mad Max Saga",
+    "synopsis": "À medida que o mundo desabava, a jovem Furiosa é retirada do Lugar Verde das Muitas Mães e cai nas mãos de uma grande Horda de Motociclistas liderada pelo Senhor da Guerra Dementus. Varrendo o Deserto, deparam-se com a Cidadela presidida por Immortan Joe. Enquanto os dois tiranos guerreiam pela supremacia, Furiosa tem de sobreviver a muitas provações enquanto reúne os meios para encontrar o caminho de volta a casa. Anya Taylor-Joy e Chris Hemsworth protagonizam este filme, do vencedor do Prémio de Academia®, George Miller, que marca o aguardado regresso ao icónico mundo distópico que criou há mais de 30 anos com os marcantes filmes \"Mad Max\".",
+    "genres": [
+      "Ação",
+      "Ficção científica",
+      "Aventura"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "George Miller",
+    "cast": [
+      "Anya Taylor-Joy",
+      "Chris Hemsworth",
+      "Tom Burke"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/afy34b5II1NgA6paGgHnf4y86w1.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/raph7qjAGTMXaIjVxt6ZDSXRzUr.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=LYV3001u574",
+    "tmdbId": 786892,
+    "durationMin": 148,
+    "ageRating": "M/M/14",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Tornados",
+    "originalTitle": "Twisters",
+    "synopsis": "Kate Cooper, uma antiga caçadora de tempestades assombrada por um encontro devastador com um tornado, dedica-se agora a estudar os padrões das tempestades em Nova Iorque. O seu amigo Javi, que está a testar um sistema de rastreamento inovador, vai trazê-la de volta ao terreno onde se cruza com Tyler Owens, um influenciador digital, sedutor e imprudente que gosta de publicar as suas aventuras nas redes sociais. À medida que a temporada de tornados ganha intensidade, começa um fenómeno nunca visto: Katy, Tyler e a sua equipa estão no caminho de múltiplas tempestades que convergem para o centro do Oklahoma.",
+    "genres": [
+      "Ação",
+      "Thriller"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Lee Isaac Chung",
+    "cast": [
+      "Daisy Edgar-Jones",
+      "Glen Powell",
+      "Anthony Ramos"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/fOG5890ODwr8ShcI0E9oh1sa7zW.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/58D6ZAvOKxlHjyX9S8qNKSBE9Y.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=AZbEi95SuMg",
+    "tmdbId": 718821,
+    "durationMin": 123,
+    "ageRating": "M/M/12",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Mufasa - O Rei Leão",
+    "originalTitle": "Mufasa: The Lion King",
+    "synopsis": "Simba, tendo-se tornado rei das Pride Lands, está determinado a fazer com que o seu filho siga os seus passos. Ao mesmo tempo que isto acontece, vamos conhecer a história por detrás de Mufasa, entendo melhor a sua origem.",
+    "genres": [
+      "Aventura",
+      "Família",
+      "Animação"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Barry Jenkins",
+    "cast": [
+      "Aaron Pierre",
+      "Kelvin Harrison Jr.",
+      "Tiffany Boone"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/iMVuv6Gz5fj7vZ51IjRF3AiW87y.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/1w8kutrRucTd3wlYyu5QlUDMiG1.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=BMSFlCy840w",
+    "tmdbId": 762509,
+    "durationMin": 121,
+    "ageRating": "M/12",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Sonic 3: O Filme",
+    "originalTitle": "Sonic the Hedgehog 3",
+    "synopsis": "Sonic, Knuckles e Tails reúnem-se contra um novo e poderoso adversário, Shadow, um vilão misterioso com poderes diferentes de tudo o que alguma vez tiveram de enfrentar. Ao terem as suas capacidades ultrapassadas em todos os aspetos, a Equipa Sonic tem de recorrer a uma aliança inesperada, na esperança de conseguir deter Shadow e proteger o planeta.",
+    "genres": [
+      "Ação",
+      "Ficção científica",
+      "Comédia",
+      "Família"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Jeff Fowler",
+    "cast": [
+      "Ben Schwartz",
+      "Jim Carrey",
+      "Keanu Reeves"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/yobd9hwPUKhRKBK8MgyoH8rdB33.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/zOpe0eHsq0A2NvNyBbtT6sj53qV.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=lTtlBgvOwqA",
+    "tmdbId": 939243,
+    "durationMin": 110,
+    "ageRating": "M/M/6",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "A Substância",
+    "originalTitle": "The Substance",
+    "synopsis": "Em \"A SUBSTÂNCIA\", uma celebridade em decadência decide usar uma droga clandestina, uma substância que replica células e cria temporariamente uma versão mais jovem e melhor de si mesma.",
+    "genres": [
+      "Terror",
+      "Ficção científica"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "Coralie Fargeat",
+    "cast": [
+      "Demi Moore",
+      "Margaret Qualley",
+      "Dennis Quaid"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/6L3PfQEydRzONYrhtpWtchRhOuV.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/bVSOgrxasVJF6V71T7v2KfBRSzu.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=lR5nlovVgvQ",
+    "tmdbId": 933260,
+    "durationMin": 140,
+    "ageRating": "M/M/16",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Avatar: Fogo e Cinzas",
+    "originalTitle": "Avatar: Fire and Ash",
+    "synopsis": "Após a devastadora guerra contra a RDA e a perda do seu filho mais velho, Jake Sully e Neytiri enfrentam uma nova ameaça em Pandora: o Povo das Cinzas, uma tribo Na'vi violenta e sedenta de poder liderada pelo implacável Varang. A família de Jake deve lutar pela sua sobrevivência e pelo futuro de Pandora num conflito que os leva ao limite emocional e físico.",
+    "genres": [
+      "Ficção científica",
+      "Aventura",
+      "Fantasia"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "James Cameron",
+    "cast": [
+      "Sam Worthington",
+      "Zoe Saldaña",
+      "Sigourney Weaver"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/pcBaJsJdcOkxJcWQD03WkQIw3eS.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/u8DU5fkLoM5tTRukzPC31oGPxaQ.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=6zmO2mtciYs",
+    "tmdbId": 83533,
+    "durationMin": 195,
+    "ageRating": "M/M/12",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  },
+  {
+    "title": "Superman",
+    "originalTitle": "Superman",
+    "synopsis": "O Super-Homem tem de conciliar a sua herança alienígena kryptoniana com a sua educação humana como repórter Clark Kent. Como a encarnação da verdade, da justiça e do caminho humano, depressa se encontra num mundo que vê isso como antiquado.",
+    "genres": [
+      "Ficção científica",
+      "Aventura",
+      "Ação"
+    ],
+    "language": "en",
+    "subtitleLanguage": "pt",
+    "director": "James Gunn",
+    "cast": [
+      "David Corenswet",
+      "Rachel Brosnahan",
+      "Nicholas Hoult"
+    ],
+    "posterUrl": "https://image.tmdb.org/t/p/w500/v8ezJI3qfEv4OYq8AWSp4inFIwE.jpg",
+    "bannerUrl": "https://image.tmdb.org/t/p/w1280/yRBc6WY3r1Fz5Cjd6DhSvzqunED.jpg",
+    "trailerUrl": "https://www.youtube.com/watch?v=MikgqM0LXr4",
+    "tmdbId": 1061474,
+    "durationMin": 130,
+    "ageRating": "M/M/12",
+    "featured": false,
+    "isReleased": true,
+    "isPresale": false
+  }
+]

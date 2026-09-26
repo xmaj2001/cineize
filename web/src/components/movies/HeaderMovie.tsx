@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { getMoviesFormat } from "@/components/movies/utiles";
-import { ApiMovieDetails, SessionType } from "@/lib/features/movies";
+import { ApiMovieDetails, SessionType } from "@/lib/features/moviesss";
 import { NotifyMeModal } from "./NotifyMeModal";
 import { TrailerModal } from "./TrailerModal";
 
