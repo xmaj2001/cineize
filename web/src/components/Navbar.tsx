@@ -73,11 +73,6 @@ function NavbarContent() {
       exact: true,
     },
     {
-      href: `/${lang}/movies?status=brevemente`,
-      label: dict.nav?.coming_soon || "Lançamentos",
-      icon: CalendarDays,
-    },
-    {
       href: `/${lang}/movies?category=animes`,
       label: "Animes",
       icon: Tv,
@@ -109,7 +104,6 @@ function NavbarContent() {
       }`}
     >
       <div className="mx-auto flex items-center justify-between px-4 sm:px-6 w-full max-w-7xl gap-4">
-        
         {/* Lado Esquerdo: Hamburger Mobile + Logo */}
         <div className="flex items-center gap-3">
           <button
@@ -149,7 +143,7 @@ function NavbarContent() {
                   "relative flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-all duration-200",
                   false
                     ? "bg-primary text-primary-foreground font-semibold shadow-sm"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
                 )}
               >
                 <span>{link.label}</span>
@@ -188,9 +182,8 @@ function NavbarContent() {
           {/* Seletor de Idioma */}
           <LanguageToggle />
         </div>
-
       </div>
-        <div className="dot-divider" />
+     
 
       {/* ── Search Drawer Mobile ── */}
       {searchOpen && (
@@ -202,7 +195,7 @@ function NavbarContent() {
       <aside
         className={cn(
           "fixed inset-y-0 right-0 z-[70] w-full max-w-xs bg-background border-l border-border shadow-2xl transition-transform duration-300 ease-in-out md:hidden flex flex-col p-6",
-          searchOpen ? "translate-x-0" : "translate-x-full"
+          searchOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
         <div className="flex items-center justify-between mb-6">
@@ -239,7 +232,7 @@ function NavbarContent() {
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-[70] w-full max-w-xs bg-background border-r border-border shadow-2xl transition-transform duration-300 ease-in-out lg:hidden flex flex-col p-6",
-          menuOpen ? "translate-x-0" : "-translate-x-full"
+          menuOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
         <div className="flex items-center justify-between mb-8">
@@ -274,7 +267,7 @@ function NavbarContent() {
                   "flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-colors",
                   active
                     ? "bg-primary text-primary-foreground font-bold"
-                    : "text-foreground hover:bg-muted"
+                    : "text-foreground hover:bg-muted",
                 )}
               >
                 <div className="flex items-center gap-3">
@@ -291,6 +284,7 @@ function NavbarContent() {
           })}
         </nav>
       </aside>
+       <div className="dot-divider" />
     </header>
   );
 }

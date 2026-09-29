@@ -8,9 +8,11 @@ import {
   IsEnum,
   MaxLength,
   Min,
+  Max,
 } from "class-validator";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { AgeRating } from "src/generated/prisma/enums";
+import { Type } from "class-transformer";
 
 export class CreateMovieDto {
   @ApiProperty({ example: "Avatar: The Way of Water" })
@@ -91,4 +93,26 @@ export class CreateMovieDto {
   @IsOptional()
   @IsBoolean()
   active?: boolean;
+}
+
+export class CatalogQueryDto {
+  @ApiPropertyOptional({ description: "Slug do cinema", example: "talatona" })
+  @IsOptional()
+  @IsString()
+  cinema?: string;
+
+  @ApiPropertyOptional({ description: "ID do último item da página anterior" })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  cursor?: number;
+
+  @ApiPropertyOptional({ default: 10, maximum: 50 })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  @Max(50)
+  limit: number = 10;
 }

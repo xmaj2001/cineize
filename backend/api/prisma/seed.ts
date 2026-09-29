@@ -9,6 +9,7 @@ import { seedSeats } from "./seeds/04-seats.seed";
 import { seedMovies } from "./seeds/05-movies.seed";
 import { seedExhibitions } from "./seeds/06-exhibitions.seed";
 import { seedSessions } from "./seeds/07-sessions.seed";
+import { seedTickets } from "./seeds/08-tickets.seed";
 
 async function main() {
   console.log("🌱 Cineize Seed\n");
@@ -46,6 +47,10 @@ async function main() {
   // ── Layer 5: Sessões ───────────────────────────────────────
   console.log("\n📦 Layer 5 — Sessões");
   await seedSessions(exhibitions, halls, SEED_CONFIG);
+
+  // ── Layer 6: Tickets de demonstração (lugares ocupados) ─────
+  console.log("\n📦 Layer 6 — Tickets de demonstração");
+  await seedTickets();
 
   // ── Resumo ─────────────────────────────────────────────────
   console.log("\n" + "═".repeat(50));

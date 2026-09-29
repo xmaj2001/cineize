@@ -196,8 +196,9 @@ model Cinema {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  users User[]
-  halls Hall[]
+  users          User[]
+  halls          Hall[]
+  featuredMovies FeaturedMovie[]
 
   @@index([locationId])
   @@index([active])
@@ -217,28 +218,49 @@ enum AgeRating {
 }
 
 model Movie {
-  id              Int            @id @default(autoincrement())
-  title           String         @db.VarChar(255)
-  slug            String         @unique @db.VarChar(255)
-  synopsis        String         @db.Text
+  id              Int             @id @default(autoincrement())
+  title           String          @db.VarChar(255)
+  slug            String          @unique @db.VarChar(255)
+  synopsis        String          @db.Text
   durationMinutes Int
   genres          String[]
   ageRating       AgeRating
-  director        String?        @db.VarChar(150)
+  director        String?         @db.VarChar(150)
   cast            String[]
-  worldLaunchDate DateTime?      @db.Date
-  basePrice       Decimal        @db.Decimal(10, 2)
-  posterUrl       String?        @db.VarChar(500)
-  backdropUrl     String?        @db.VarChar(500)
-  trailerUrl      String?        @db.VarChar(500)
-  active          Boolean        @default(true)
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
+  worldLaunchDate DateTime?       @db.Date
+  basePrice       Decimal         @db.Decimal(10, 2)
+  posterUrl       String?         @db.VarChar(500)
+  backdropUrl     String?         @db.VarChar(500)
+  trailerUrl      String?         @db.VarChar(500)
+  active          Boolean         @default(true)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
   exhibitions     Exhibition[]
   sessionMovies   SessionMovie[]
+  featuredMovies  FeaturedMovie[]
 
   @@index([active])
   @@index([ageRating])
+}
+
+model FeaturedMovie {
+  id        Int       @id @default(autoincrement())
+  movieId   Int
+  movie     Movie     @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  cinemaId  Int? // null = destaque global
+  cinema    Cinema?   @relation(fields: [cinemaId], references: [id], onDelete: Cascade)
+  priority  Int       @default(0) // maior = aparece primeiro
+  headline  String?   @db.VarChar(150)
+  bannerUrl String?   @db.VarChar(500) // banner específico do carrossel
+  startsAt  DateTime  @default(now())
+  endsAt    DateTime?
+  active    Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([active, startsAt, endsAt])
+  @@index([cinemaId])
+  @@index([movieId])
 }
 
 model Hall {
@@ -262,16 +284,24 @@ model Hall {
   @@index([format])
 }
 
+enum SeatStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+}
+
 model Seat {
-  id        Int      @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   hallId    Int
-  hall      Hall     @relation(fields: [hallId], references: [id], onDelete: Cascade)
-  row       String   @db.Char(1)
+  hall      Hall       @relation(fields: [hallId], references: [id], onDelete: Cascade)
+  row       String     @db.Char(1)
   number    Int
-  seatType  SeatType @default(NORMAL)
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  status    SeatStatus @default(AVAILABLE)
+  seatType  SeatType   @default(NORMAL)
+  active    Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  tickets   Ticket[]
 
   @@unique([hallId, row, number])
   @@index([hallId])
@@ -327,6 +357,7 @@ model SessionMovie {
   createdBy        Int?
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
+  tickets          Ticket[]
 
   @@unique([hallId, startDateTime])
   @@index([movieId])
@@ -334,6 +365,36 @@ model SessionMovie {
   @@index([exhibitionId])
   @@index([startDateTime])
   @@index([active])
+}
+
+model Ticket {
+  id               String        @id @default(uuid())
+  sessionId        Int
+  session          SessionMovie  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  seatId           Int
+  seat             Seat          @relation(fields: [seatId], references: [id], onDelete: Restrict)
+  clientId         Int?
+  email            String?       @db.VarChar(150)
+  phone            String?       @db.VarChar(20)
+  pricePaid        Decimal       @db.Decimal(10, 2)
+  state            TicketState   @default(RESERVED)
+  qrCode           String        @unique @db.VarChar(500)
+  barcode          String?       @unique @db.VarChar(100)
+  controlNumber    String        @unique @db.VarChar(50)
+  paymentMethod    PaymentMethod
+  paymentReference String?       @db.VarChar(100)
+  purchaseDate     DateTime      @default(now())
+  validationDate   DateTime?
+  validatedBy      Int?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@unique([sessionId, seatId])
+  @@index([sessionId])
+  @@index([seatId])
+  @@index([state])
+  @@index([controlNumber])
+  @@index([purchaseDate])
 }
 
 // ============================================================================

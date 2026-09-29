@@ -28,6 +28,7 @@ export async function GET(
             id: true,
             title: true,
             posterUrl: true,
+            bannerUrl: true,
             durationMin: true,
             ageRating: true,
           },
@@ -35,7 +36,15 @@ export async function GET(
         room: {
           include: {
             location: {
-              select: { id: true, name: true, province: true, city: true },
+              select: {
+                id: true,
+                name: true,
+                province: true,
+                city: true,
+                address: true,
+                latitude: true,
+                longitude: true,
+              },
             },
             seats: {
               orderBy: [{ row: "asc" }, { number: "asc" }],
@@ -90,22 +99,32 @@ export async function GET(
     });
 
     return ok({
-      id: session.id,
-      type: session.type,
-      tier: session.tier,
       startTime: session.startTime,
       endTime: session.endTime,
-      saleOpensAt: session.saleOpensAt,
-      price: session.price,
-      movie: session.movie,
-      room: {
-        id: session.room.id,
-        name: session.room.name,
-        capacity: session.room.capacity,
-        format: session.room.format,
-        location: session.room.location,
+      room: Number.parseInt(session.room.name.replace(/\D/g, ""), 10) || 0,
+      movie: {
+        title: session.movie.title,
+        slug: session.movie.title
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, ""),
+        posterUrl: session.movie.posterUrl,
+        backdropUrl: session.movie.bannerUrl ?? session.movie.posterUrl,
+        durationMinutes: session.movie.durationMin,
+      },
+      cinema: {
+        name: session.room.location.name,
+        address: session.room.location.address ?? "",
+        latitude: String(session.room.location.latitude),
+        longitude: String(session.room.location.longitude),
       },
       seats,
+      price: session.price,
+      format: session.room.format,
+      type: session.type,
+
     });
   } catch (error) {
     return handleError(error);

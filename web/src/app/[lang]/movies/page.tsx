@@ -1,5 +1,5 @@
 import { getDictionary, Locale } from "@/app/lib/dictionaries";
-import { InfiniteMoviesFeed } from "@/lib/features/feeds/components/infinite-movies-feed";
+import { InfiniteMoviesFeed } from "@/lib/features/movies/components/infinite-movies-feed";
 import { Film } from "lucide-react";
 import { Metadata } from "next";
 

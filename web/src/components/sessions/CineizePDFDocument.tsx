@@ -7,14 +7,14 @@ import {
   StyleSheet,
   Font,
 } from "@react-pdf/renderer";
-import { ApiSessionDetail, SessionSeat } from "@/lib/features/sessions";
+import { MovieSessionDetail, SessionSeat } from "@/lib/features/sessions/types";
 
 interface ExtendedSessionSeat extends SessionSeat {
   ticketCode?: string;
 }
 
 interface PDFProps {
-  session: ApiSessionDetail;
+  session: MovieSessionDetail;
   seats: ExtendedSessionSeat[];
   paymentMethod?: string;
 }
@@ -138,7 +138,7 @@ export function CineizePDFDocument({
       <Page size={[226, 600]} style={styles.page}>
         {seats.map((seat, index) => {
           const code =
-            seat.ticketCode || `CZ-${seat.id.slice(0, 8).toUpperCase()}`;
+            seat.ticketCode || `CZ-${String(seat.id).padStart(8, "0")}`;
           const seatLabel = `${seat.row}${seat.number}`;
 
           return (
@@ -146,7 +146,7 @@ export function CineizePDFDocument({
               {/* Header */}
               <View style={styles.header}>
                 <Text style={styles.logo}>cineIze</Text>
-                <Text style={styles.subtitle}>{session.room.location.name}</Text>
+                <Text style={styles.subtitle}>{session.cinema.name}</Text>
                 <Text style={styles.subtitle}>
                   COMPROVATIVO ({index + 1}/{seats.length})
                 </Text>
@@ -157,8 +157,8 @@ export function CineizePDFDocument({
                 <Text style={{ fontSize: 7, color: "#64748B" }}>FILME:</Text>
                 <Text style={styles.title}>{session.movie.title}</Text>
                 <Text style={styles.metaText}>
-                  {session.movie.ageRating} | {session.room.format} |{" "}
-                  {session.movie.durationMin} MIN
+                  {session.format} |{" "}
+                  {session.movie.durationMinutes} MIN
                 </Text>
               </View>
 
@@ -166,7 +166,7 @@ export function CineizePDFDocument({
               <View style={styles.highlightBox}>
                 <View style={styles.boxCol}>
                   <Text style={styles.boxLabel}>SALA</Text>
-                  <Text style={styles.boxValue}>{session.room.name}</Text>
+                  <Text style={styles.boxValue}>{session.room}</Text>
                 </View>
                 <View style={[styles.boxCol, { alignItems: "flex-end" }]}>
                   <Text style={styles.boxLabel}>LUGAR</Text>

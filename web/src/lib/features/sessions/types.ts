@@ -1,59 +1,51 @@
 export type SeatKind = "STANDARD" | "RECLINER" | "ACCESSIBLE";
-export type TicketStatus = "AVAILABLE" | "RESERVED" | "SOLD";
-export type ScreenFormat = "D2" | "D3" | "D4X" | "IMAX" | "VIP";
-export type SessionType = "NORMAL" | "PREMIERE";
-export type PricingTier = "WEEKDAY" | "WEEKEND" | "HOLIDAY" | "STUDENT";
+export type SeatStatus = "AVAILABLE" | "RESERVED" | "SOLD";
 
-export interface SessionSeat {
+export type SessionSeat = {
   id: string;
   row: string;
   number: number;
   type: SeatKind;
-  status: TicketStatus;
+  status: SeatStatus;
 }
 
-export interface SessionLocation {
+export interface MovieSessionDetail {
   id: string;
-  name: string;
-  province: string;
-  city: string;
-}
-
-export interface SessionRoom {
-  id: string;
-  name: string;
-  capacity: number;
-  format: ScreenFormat;
-  location: SessionLocation;
-}
-
-export interface SessionMovieCard {
-  id: string;
-  title: string;
-  posterUrl: string;
-  durationMin: number;
-  ageRating: string;
-}
-
-export interface ApiSessionDetail {
-  id: string;
-  type: SessionType;
-  tier: PricingTier;
-  startTime: string;
-  endTime: string;
-  saleOpensAt: string;
-  price: number;
-  movie: SessionMovieCard;
-  room: SessionRoom;
+  startTime: Date;
+  endTime: Date;
+  room: number;
+  movie: {
+    title: string;
+    slug: string;
+    posterUrl: string;
+    backdropUrl: string;
+    durationMinutes: number;
+  };
+  cinema: {
+    name: string;
+    address: string;
+    latitude: string;
+    longitude: string;
+  };
   seats: SessionSeat[];
+  price: number;
+  format: string;
+  type: string;
 }
 
-/**
- * Evento emitido pelo endpoint SSE do backend quando o estado
- * de um assento muda (reserva, compra, expiração do TTL).
- */
-export interface SeatUpdateEvent {
-  sessionId: string;
-  seatId: string;
-  status: TicketStatus;
+interface Cinema {
+  name: string;
+  slug: string;
 }
+
+export type HallFormat = "TWOD" | "THREED" | "FOURD" | "IMAX" | string;
+
+export type MovieSession = {
+  id: number;
+  startTime: Date;
+  endTime: Date;
+  price: number;
+  format: HallFormat;
+  cinema: Cinema;
+};
+

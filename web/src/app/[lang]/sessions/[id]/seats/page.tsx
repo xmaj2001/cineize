@@ -1,7 +1,7 @@
-import { sessionService } from "@/lib/features/sessions";
+import { getSession } from "@/lib/features/sessions/queries";
 import { Metadata } from "next";
 import NotFound from "../../../not-found";
-import { SeatMap } from "@/components/sessions/SeatMap";
+import { SeatMap } from "@/lib/features/sessions/components/SeatMap";
 
 interface SeatsPageProps {
   params: Promise<{ lang: string; id: string }>;
@@ -11,7 +11,7 @@ export async function generateMetadata({
   params,
 }: SeatsPageProps): Promise<Metadata> {
   const { id } = await params;
-  const res = await sessionService.getSessionById(id);
+  const res = await getSession(id);
   if (!res || !res.success)
     return { title: "Sessão não encontrada - cineIze Angola" };
   const session = res.data;
@@ -24,7 +24,7 @@ export async function generateMetadata({
 
 export default async function SeatsPage({ params }: SeatsPageProps) {
   const { id } = await params;
-  const res = await sessionService.getSessionById(id);
+  const res = await getSession(id);
   if (!res || !res.success) return NotFound();
   const session = res.data;
 

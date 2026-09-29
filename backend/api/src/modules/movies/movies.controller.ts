@@ -10,10 +10,14 @@ import {
   ParseIntPipe,
 } from "@nestjs/common";
 import { ApiTags, ApiOperation, ApiQuery } from "@nestjs/swagger";
-import { MoviesService } from "./movies.service";
-import { CreateMovieDto } from "./dto/create-movie.dto";
-import { UpdateMovieDto } from "./dto/update-movie.dto";
 import { AllowAnonymous } from "@thallesp/nestjs-better-auth";
+import { MoviesService } from "./movies.service";
+import { CatalogQueryDto, CreateMovieDto } from "./dto/create-movie.dto";
+import { UpdateMovieDto } from "./dto/update-movie.dto";
+import { ListNowShowingUseCase } from "./use-cases/list-now-showing.use-case";
+import { ListComingSoonUseCase } from "./use-cases/list-coming-soon.use-case";
+import { ListPresaleUseCase } from "./use-cases/list-presale.use-case";
+import { ListFeaturedUseCase } from "./use-cases/list-featured.use-case";
 
 @ApiTags("Movies")
 @Controller({
@@ -21,13 +25,69 @@ import { AllowAnonymous } from "@thallesp/nestjs-better-auth";
   path: "movies",
 })
 export class MoviesController {
-  constructor(private readonly moviesService: MoviesService) {}
+  constructor(
+    private readonly moviesService: MoviesService,
+    private readonly listNowShowing: ListNowShowingUseCase,
+    private readonly listPresale: ListPresaleUseCase,
+    private readonly listComingSoon: ListComingSoonUseCase,
+    private readonly listFeatured: ListFeaturedUseCase,
+  ) {}
 
   @Post()
   @ApiOperation({ summary: "Criar filme (SUPER_ADMIN)" })
   create(@Body() dto: CreateMovieDto) {
     return this.moviesService.create(dto);
   }
+
+  // ─────────────────────────────────────────────
+  // CATÁLOGO (rotas estáticas SEMPRE antes de ":id")
+  // ─────────────────────────────────────────────
+
+  @AllowAnonymous()
+  @Get("featured")
+  @ApiOperation({ summary: "Filmes em destaque (carrossel)" })
+  featured(@Query() q: CatalogQueryDto) {
+    return this.listFeatured.execute({
+      cinemaSlug: q.cinema,
+      limit: q.limit,
+    });
+  }
+
+  @AllowAnonymous()
+  @Get("now-showing")
+  @ApiOperation({ summary: "Filmes em cartaz (próximos 7 dias)" })
+  nowShowing(@Query() q: CatalogQueryDto) {
+    return this.listNowShowing.execute({
+      cinemaSlug: q.cinema,
+      limit: q.limit,
+      cursor: q.cursor,
+    });
+  }
+
+  @AllowAnonymous()
+  @Get("presale")
+  @ApiOperation({ summary: "Filmes em pré-venda" })
+  presale(@Query() q: CatalogQueryDto) {
+    return this.listPresale.execute({
+      cinemaSlug: q.cinema,
+      limit: q.limit,
+      cursor: q.cursor,
+    });
+  }
+
+  @AllowAnonymous()
+  @Get("coming-soon")
+  @ApiOperation({ summary: "Filmes em breve (sem sessões à venda)" })
+  comingSoon(@Query() q: CatalogQueryDto) {
+    return this.listComingSoon.execute({
+      limit: q.limit,
+      cursor: q.cursor,
+    });
+  }
+
+  // ─────────────────────────────────────────────
+  // LISTAGEM GERAL (página "todos os filmes")
+  // ─────────────────────────────────────────────
 
   @AllowAnonymous()
   @Get()

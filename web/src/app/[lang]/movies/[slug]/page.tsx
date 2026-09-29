@@ -2,7 +2,7 @@ import NotFound from "../../not-found";
 import { JsonLd } from "@/components/JsonLd";
 import { getDictionary, Locale } from "@/app/lib/dictionaries";
 import { HeaderMovie } from "@/lib/features/movies/components/header-movie";
-import { SessionsList } from "@/lib/features/movies/components/sessions-list";
+import { SessionsList } from "@/lib/features/sessions/components/sessions-list";
 
 interface MoviePageProps {
   params: Promise<{ lang: Locale; slug: string }>;

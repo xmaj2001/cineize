@@ -1,11 +1,10 @@
 import { getDictionary, Locale } from "@/app/lib/dictionaries";
-import { ComingSoonSection } from "@/components/feeds/ComingSoonSection";
-import { NowShowingSection } from "@/components/feeds/NowShowingSection";
-import { PreSaleSection } from "@/components/feeds/PreSaleSection";
+import { ComingSoonSection } from "@/lib/features/home/components/ComingSoonSection";
 import { JsonLd } from "@/components/JsonLd";
-import { Hero } from "@/components/movies/Hero";
-import { movieService } from "@/lib/features/moviesss";
+// import { Hero } from "@/components/movies/Hero";
 import { Metadata } from "next";
+import { NowShowingSection } from "@/lib/features/home/components/now-showing/now-showing-section";
+import { PreSaleSection } from "@/lib/features/home/components/pre-sale/pre-sale-section";
 
 interface pageProps {
   params: Promise<{ lang: Locale }>;
@@ -70,15 +69,14 @@ export default async function Home({ params }: pageProps) {
     ],
   };
 
-  const feeds = await movieService.getHomeFeed();
   return (
     <>
       <JsonLd data={jsonLd} />
-      <Hero movies={feeds.data.featured} />
+      {/* <Hero movies={feeds.data.featured} /> */}
       <div className="px-4 py-8 md:px-8 max-w-7xl mx-auto flex flex-col gap-10">
-        <NowShowingSection lang={lang} movies={feeds.data.nowShowing} />
-        <PreSaleSection lang={lang} movies={feeds.data.presale} />
-        <ComingSoonSection lang={lang} movies={feeds.data.comingSoon} />
+         <NowShowingSection lang={lang} />
+         <PreSaleSection lang={lang}/>
+        <ComingSoonSection lang={lang} /> 
       </div>
     </>
   );

@@ -105,6 +105,15 @@ export class SessionsController {
     const date = new Date(dateString);
     return date instanceof Date && !isNaN(date.getTime());
   }
+  @Get(":id/seats")
+  @AllowAnonymous()
+  @ApiOperation({
+    summary: "Obter lugares disponíveis e ocupados de uma sessão",
+  })
+  findSeats(@Param("id", ParseIntPipe) id: number) {
+    return this.sessionsService.findSeats(id);
+  }
+
   @Get(":id")
   @AllowAnonymous()
   @ApiOperation({ summary: "Obter sessão por ID" })

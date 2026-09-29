@@ -44,12 +44,13 @@ export async function apiFetch<T>(
       headers,
     });
   } catch (error) {
+    console.log(`Error fetching API endpoint: ${url}`, error);
     throw new ApiNetworkError(
       `Falha ao comunicar com o BFF: ${error instanceof Error ? error.message : "erro de rede"}`,
     );
   }
 
-  return parseApiResponse<T>(response, "apiFetch");
+  return response as T;
 }
 
 // async function getClientSessionToken(): Promise<string | null> {

@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { X, Bell, Mail, Phone, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
-import { useCreatePresaleSubscription } from "@/lib/features/presale-subscriptions/hooks/use-presale-subscription";
 import { useParams } from "next/navigation";
 import { getDictionary } from "@/app/lib/dictionaries";
 
@@ -21,34 +19,33 @@ export function NotifyMeModal({ movieId, movieTitle, onClose, lang: propLang }: 
   const [whatsapp, setWhatsapp] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { mutate, isPending } = useCreatePresaleSubscription();
+  // const { mutate, isPending } = useCreatePresaleSubscription();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email && !whatsapp) return;
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!email && !whatsapp) return;
 
-    setError(null);
-    mutate(
-      { movieId, email: email || undefined, whatsapp: whatsapp || undefined },
-      {
-        onSuccess: () => {
-          setIsSuccess(true);
-          setError(null);
-        },
-        onError: (error) => {
-          setError(error.message);
-        },
-      }
-    );
-  };
+  //   setError(null);
+  //   mutate(
+  //     { movieId, email: email || undefined, whatsapp: whatsapp || undefined },
+  //     {
+  //       onSuccess: () => {
+  //         setIsSuccess(true);
+  //         setError(null);
+  //       },
+  //       onError: (error) => {
+  //         setError(error.message);
+  //       },
+  //     }
+  //   );
+  // };
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
-      <div
+      {/* <div
         className="modal-panel modal-animate w-full max-w-md mx-4 p-0"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-border bg-muted/30">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -72,7 +69,6 @@ export function NotifyMeModal({ movieId, movieTitle, onClose, lang: propLang }: 
           </button>
         </div>
 
-        {/* Body */}
         <div className="p-6">
           {isSuccess ? (
             <div className="flex flex-col items-center justify-center py-6 text-center animate-in fade-in zoom-in duration-300">
@@ -91,7 +87,6 @@ export function NotifyMeModal({ movieId, movieTitle, onClose, lang: propLang }: 
               </div>
 
               <div className="flex flex-col gap-4">
-                {/* Email Input */}
                 <div className="space-y-1.5">
                   <label htmlFor="email" className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                     {dict.movies.notify_modal.email}
@@ -110,7 +105,6 @@ export function NotifyMeModal({ movieId, movieTitle, onClose, lang: propLang }: 
                 </div>
               </div>
 
-              {/* Mensagem de erro */}
               {error && (
                 <div className="flex items-start gap-2 rounded-xl border border-destructive/30 bg-destructive/10 px-3 py-2.5 text-sm text-destructive">
                   <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" />
@@ -145,7 +139,7 @@ export function NotifyMeModal({ movieId, movieTitle, onClose, lang: propLang }: 
             </form>
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
