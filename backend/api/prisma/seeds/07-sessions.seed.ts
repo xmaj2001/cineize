@@ -1,18 +1,16 @@
-// ============================================================
-// SEED 07 — SESSIONS (Sessões de Cinema)
-// ============================================================
-import { prisma } from "./_client";
-import { SeedConfig } from "./_config";
+import { prisma, faker } from "./_client";
+import { SEED_CONFIG } from "./_config";
+import { addDays, atLuandaHour, utcMidnight } from "./_helpers";
 import {
   Exhibition,
-  Hall,
-  SessionType,
-  SessionState,
   ExhibitionType,
   Format,
+  Hall,
+  Movie,
+  Prisma,
+  SessionState,
+  SessionType,
 } from "../../src/generated/prisma/client";
-
-const SESSION_HOURS = [10, 14, 17, 20];
 
 const FORMAT_PRICE_MULTIPLIER: Record<Format, number> = {
   TWOD: 1.0,
@@ -21,87 +19,91 @@ const FORMAT_PRICE_MULTIPLIER: Record<Format, number> = {
   MAX: 2.0,
 };
 
+/** Dias em que a exibição tem sessões */
+function sessionDaysFor(exhibition: Exhibition): Date[] {
+  if (exhibition.type === ExhibitionType.PRE_SALE) {
+    // sessões a partir do dia da estreia (endDate)
+    return Array.from({ length: SEED_CONFIG.presale.sessionDays }, (_, i) =>
+      addDays(exhibition.endDate!, i),
+    );
+  }
+  // próximos N dias, a começar hoje
+  return Array.from({ length: SEED_CONFIG.nowShowing.daysAhead }, (_, i) =>
+    utcMidnight(i),
+  );
+}
+
+/** Procura uma sala livre nesse horário (respeita @@unique([hallId, startDateTime])) */
+function pickFreeHall(
+  halls: Hall[],
+  startDateTime: Date,
+  occupied: Set<string>,
+): Hall | null {
+  for (const hall of faker.helpers.shuffle(halls)) {
+    const key = `${hall.id}|${startDateTime.toISOString()}`;
+    if (!occupied.has(key)) {
+      occupied.add(key);
+      return hall;
+    }
+  }
+  return null;
+}
+
 export async function seedSessions(
   exhibitions: Exhibition[],
   halls: Hall[],
-  config: SeedConfig,
+  movies: Movie[],
 ) {
-  const total = exhibitions.length * config.sessionsPerExhibition;
-  console.log(`   🎟️  Criando ${total} sessão(ões)...`);
-
-  // Mapa: hallId → Set de "YYYY-MM-DD-HH" para evitar conflitos no @@unique([hallId, startDateTime])
-  const occupiedSlots = new Map<number, Set<string>>();
-  for (const hall of halls) {
-    occupiedSlots.set(hall.id, new Set());
-  }
-
-  let created = 0;
+  const basePrice = new Map(movies.map((m) => [m.id, Number(m.basePrice)]));
+  const occupied = new Set<string>();
+  const rows: Prisma.SessionMovieCreateManyInput[] = [];
   let skipped = 0;
 
   for (const exhibition of exhibitions) {
-    const movie = await prisma.movie.findUniqueOrThrow({
-      where: { id: exhibition.movieId },
-      select: { basePrice: true },
-    });
+    const isPresale = exhibition.type === ExhibitionType.PRE_SALE;
+    const perDay = isPresale
+      ? SEED_CONFIG.presale.sessionsPerDay
+      : SEED_CONFIG.nowShowing.sessionsPerDay;
+    const hours = SEED_CONFIG.sessionHours.slice(0, perDay);
 
-    const sessionType: SessionType =
-      exhibition.type === ExhibitionType.PRE_SALE
-        ? SessionType.PRE_SALE
-        : SessionType.NORMAL;
+    for (const day of sessionDaysFor(exhibition)) {
+      for (const hour of hours) {
+        const startDateTime = atLuandaHour(day, hour);
+        const hall = pickFreeHall(halls, startDateTime, occupied);
 
-    const hours = SESSION_HOURS.slice(0, config.sessionsPerExhibition);
-
-    for (const hour of hours) {
-      // Tenta encontrar uma sala livre neste horário
-      const shuffledHalls = [...halls].sort(() => Math.random() - 0.5);
-      let assigned: Hall | null = null;
-      let startDateTime: Date | null = null;
-
-      for (const hall of shuffledHalls) {
-        const dateStr = exhibition.startDate.toISOString().slice(0, 10);
-        const slotKey = `${dateStr}-${hour}`;
-        const slots = occupiedSlots.get(hall.id)!;
-
-        if (!slots.has(slotKey)) {
-          assigned = hall;
-          startDateTime = new Date(exhibition.startDate);
-          startDateTime.setHours(hour, 0, 0, 0);
-          slots.add(slotKey);
-          break;
+        if (!hall) {
+          skipped++;
+          continue;
         }
-      }
 
-      if (!assigned || !startDateTime) {
-        skipped++;
-        continue;
-      }
+        const price =
+          basePrice.get(exhibition.movieId)! *
+          FORMAT_PRICE_MULTIPLIER[hall.format];
 
-      const multiplier = FORMAT_PRICE_MULTIPLIER[assigned.format];
-      const price = parseFloat(movie.basePrice.toString()) * multiplier;
-
-      await prisma.sessionMovie.create({
-        data: {
+        rows.push({
           movieId: exhibition.movieId,
-          hallId: assigned.id,
+          hallId: hall.id,
           exhibitionId: exhibition.id,
           startDateTime,
-          price: parseFloat(price.toFixed(2)),
-          sessionType,
-          capacity: assigned.capacity,
+          price: Number(price.toFixed(2)),
+          sessionType: isPresale ? SessionType.PRE_SALE : SessionType.NORMAL,
+          capacity: hall.capacity,
           currentOccupancy: 0,
           state: SessionState.AVAILABLE,
           active: true,
-        },
-      });
-
-      created++;
+        });
+      }
     }
   }
 
+  console.log(`   🎟️  Criando ${rows.length} sessão(ões)...`);
+  await prisma.sessionMovie.createMany({ data: rows });
+
   if (skipped > 0) {
     console.log(
-      `   ⚠️  ${skipped} sessão(ões) ignorada(s) por conflito de horário`,
+      `   ⚠️  ${skipped} sessão(ões) ignorada(s) por falta de sala livre`,
     );
   }
-  console.log(`   ✅ ${created} sessão(ões) criada(s)`);
+  console.log(`   ✅ ${rows.length} sessão(ões) criada(s)`);
+  return rows.length;
 }

@@ -116,3 +116,9 @@ export class CatalogQueryDto {
   @Max(50)
   limit: number = 10;
 }
+
+export interface CatalogInput {
+  cinemaSlug?: string;
+  limit: number;
+  cursor?: number;
+}

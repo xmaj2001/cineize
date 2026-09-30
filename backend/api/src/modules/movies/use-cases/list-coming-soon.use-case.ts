@@ -1,40 +1,38 @@
-// use-cases/list-coming-soon.use-case.ts
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/shared/prisma/prisma.service";
-import { SessionState } from "src/generated/prisma/client";
-import { CatalogBaseUseCase } from "./catalog.base.use-case";
+import { CatalogInput } from "../dto/create-movie.dto";
 
 @Injectable()
-export class ListComingSoonUseCase extends CatalogBaseUseCase {
-  constructor(prisma: PrismaService) {
-    super(prisma);
-  }
+export class ListComingSoonUseCase {
+  constructor(private readonly prisma: PrismaService) {}
 
-  async execute(input: { limit: number; cursor?: number }) {
-    const now = new Date();
-
-    const rows = await this.prisma.movie.findMany({
+  async execute({ limit, cursor }: CatalogInput) {
+    const movies = await this.prisma.movie.findMany({
       where: {
         active: true,
-        worldLaunchDate: { gt: now },
-        // sem nenhuma sessão à venda (nem normal nem pré-venda)
-        sessionMovies: {
-          none: {
-            active: true,
-            state: SessionState.AVAILABLE,
-            startDateTime: { gte: now },
-          },
-        },
+        worldLaunchDate: { gt: new Date() },
+        sessionMovies: { none: { active: true } },
       },
-      take: input.limit + 1,
-      ...(input.cursor && { cursor: { id: input.cursor }, skip: 1 }),
-      orderBy: [{ worldLaunchDate: "asc" }, { id: "asc" }],
       select: {
-        ...CatalogBaseUseCase.movieCardSelect,
+        id: true,
+        title: true,
+        slug: true,
+        posterUrl: true,
+        genres: true,
+        durationMinutes: true,
         worldLaunchDate: true,
       },
+      orderBy: { id: "desc" },
+      take: limit + 1,
+      ...(cursor && { cursor: { id: cursor }, skip: 1 }),
     });
 
-    return this.paginate(rows, input.limit);
+    const nextCursor = movies.length > limit ? movies.pop()!.id : undefined;
+    const items = movies.map((movie) => ({
+      ...movie,
+      sessions: [],
+    }));
+
+    return { items, nextCursor };
   }
 }

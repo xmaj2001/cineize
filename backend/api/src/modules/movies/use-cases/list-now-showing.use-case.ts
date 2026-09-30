@@ -1,25 +1,53 @@
-// use-cases/list-now-showing.use-case.ts
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/shared/prisma/prisma.service";
-import { SessionType } from "src/generated/prisma/client";
-import { CatalogBaseUseCase, CatalogInput } from "./catalog.base.use-case";
+import { SessionState } from "src/generated/prisma/client";
+import { CatalogInput } from "../dto/create-movie.dto";
 
 @Injectable()
-export class ListNowShowingUseCase extends CatalogBaseUseCase {
-  constructor(prisma: PrismaService) {
-    super(prisma);
-  }
+export class ListNowShowingUseCase {
+  constructor(private readonly prisma: PrismaService) {}
 
-  execute(input: CatalogInput) {
-    const from = new Date(); // agora, para não mostrar sessões que já passaram
-    const to = new Date(from);
-    to.setDate(to.getDate() + 7);
+  async execute({ limit, cursor }: CatalogInput) {
+    const now = new Date();
+    const weekAhead = new Date(now);
+    weekAhead.setDate(weekAhead.getDate() + 7);
 
-    return this.findMoviesWithSessions({
-      ...input,
-      type: SessionType.NORMAL,
-      from,
-      to,
+    const movies = await this.prisma.movie.findMany({
+      where: {
+        active: true,
+        worldLaunchDate: { lte: now }, // já estreou (com ou sem sessões)
+      },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        posterUrl: true,
+        genres: true,
+        durationMinutes: true,
+        worldLaunchDate: true,
+        sessionMovies: {
+          where: {
+            active: true,
+            state: SessionState.AVAILABLE,
+            // startDateTime: { gte: now, lte: weekAhead },
+          },
+          distinct: ["hallId"],
+          select: { hall: { select: { format: true } } },
+        },
+      },
+      orderBy: { id: "desc" },
+      take: limit + 1,
+      ...(cursor && { cursor: { id: cursor }, skip: 1 }),
     });
+
+    const nextCursor = movies.length > limit ? movies.pop()!.id : undefined;
+
+    const items = movies.map(({ sessionMovies, ...movie }) => ({
+      ...movie,
+      formats: [...new Set(sessionMovies.map((s) => s.hall.format))],
+      sessions: [],
+    }));
+
+    return { items, nextCursor };
   }
 }

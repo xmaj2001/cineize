@@ -29,8 +29,9 @@ export async function seedTickets() {
 
     // Semear cerca de 8% de ocupação (no mínimo 1 assento) de forma estável.
     const occupiedCount = Math.max(1, Math.floor(seats.length * 0.08));
-    const selectedSeats = Array.from({ length: occupiedCount }, (_, index) =>
-      seats[(session.id * 7 + index * 11) % seats.length],
+    const selectedSeats = Array.from(
+      { length: occupiedCount },
+      (_, index) => seats[(session.id * 7 + index * 11) % seats.length],
     );
 
     await prisma.ticket.createMany({

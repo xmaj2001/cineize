@@ -46,15 +46,35 @@ export function toTimeField(hours: number, minutes = 0): Date {
 /**
  * Adiciona dias a uma data
  */
+/** Soma dias em UTC (não depende do timezone da máquina) */
 export function addDays(date: Date, days: number): Date {
   const result = new Date(date);
-  result.setDate(result.getDate() + days);
+  result.setUTCDate(result.getUTCDate() + days);
   return result;
 }
+
+const LUANDA_UTC_OFFSET = 1; // WAT = UTC+1, sem horário de verão
 
 /**
  * Escolhe um elemento aleatório de um array
  */
 export function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
+}
+
+/** Meia-noite UTC de hoje + N dias (ideal para colunas @db.Date) */
+export function utcMidnight(daysFromToday = 0): Date {
+  const n = new Date();
+  return new Date(
+    Date.UTC(
+      n.getUTCFullYear(),
+      n.getUTCMonth(),
+      n.getUTCDate() + daysFromToday,
+    ),
+  );
+}
+
+/** "20h em Luanda" para o dia indicado, convertido para UTC */
+export function atLuandaHour(day: Date, hour: number): Date {
+  return new Date(day.getTime() + (hour - LUANDA_UTC_OFFSET) * 3_600_000);
 }

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { format, parseISO } from "date-fns";
 import { ptBR, enUS } from "date-fns/locale";
 import { FeedMovieItem } from "../../type";
-
+import { FORMAT_MAP } from "@/components/movies/utiles";
 
 interface FeedMovieCardProps {
   movie: FeedMovieItem;
@@ -31,10 +31,7 @@ export function FeedMovieCard({ movie }: FeedMovieCardProps) {
   return (
     <div className="group relative flex flex-col">
       {/* Link Principal: Clicar no poster leva para a página geral do filme */}
-      <Link
-        href={`/movies/${movie.slug || movie.id}`}
-        className="block"
-      >
+      <Link href={`/movies/${movie.slug || movie.id}`} className="block">
         <div
           className={`relative overflow-hidden rounded-md bg-card ${
             isPreEstreia
@@ -61,7 +58,7 @@ export function FeedMovieCard({ movie }: FeedMovieCardProps) {
                   key={i}
                   className="rounded-sm bg-black/60 px-1.5 py-0.5 text-[9px] font-mono font-bold text-white/90 backdrop-blur-xs border border-white/10"
                 >
-                  {fmt}
+                  {FORMAT_MAP[fmt].label}
                 </span>
               ))}
             </div>
@@ -71,7 +68,7 @@ export function FeedMovieCard({ movie }: FeedMovieCardProps) {
           {isPreEstreia && (
             <div className="absolute top-2 right-2 z-10">
               <span className="rounded-sm bg-amber-500/90 px-2 py-0.5 text-[9px] font-mono font-bold text-black uppercase tracking-wider backdrop-blur-xs shadow-sm">
-                { "PRÉ-ESTREIA"}
+                {"PRÉ-ESTREIA"}
               </span>
             </div>
           )}
@@ -94,15 +91,13 @@ export function FeedMovieCard({ movie }: FeedMovieCardProps) {
           {sessionEntries.map((entry) => (
             <Link
               key={entry.id}
-              href={`/reserva/${entry.id}`}
+              href={`/sessions/${entry.id}`}
               className={`rounded-sm border px-2 py-0.5 text-[10px] font-mono font-semibold transition-all duration-200 capitalize ${
                 isPreEstreia
                   ? "border-amber-500/50 bg-amber-500/10 text-amber-400 hover:bg-amber-500 hover:text-black hover:border-amber-500"
                   : "border-border/80 bg-secondary/60 text-secondary-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary"
               }`}
-              title={
-                "Clique para selecionar"
-              }
+              title={"Clique para selecionar"}
             >
               {entry.label}
             </Link>
