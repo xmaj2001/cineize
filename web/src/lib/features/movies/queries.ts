@@ -1,13 +1,7 @@
 "use server";
 
 import { ApiCursorEnvelope, ApiEnvelope } from "@/lib/api";
-import {
-  CatalogMovieItem,
-  ComingSoonMovieItem,
-  FeaturedMovieItem,
-  FeedMovieItem,
-  MovieDetails,
-} from "./type";
+import { FeaturedMovieItem, FeedMovieItem, MovieDetails } from "./type";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 const version = "v1";
@@ -80,8 +74,8 @@ export async function getPresaleMovies(params: CatalogParams = {}) {
 
 export async function getComingSoonMovies(params: CatalogParams = {}) {
   // em breve não depende de cinema
-  return request<ApiEnvelope<ApiCursorEnvelope<FeedMovieItem>>>(
-    "coming-soon",
-    { cursor: params.cursor, limit: params.limit },
-  );
+  return request<ApiEnvelope<ApiCursorEnvelope<FeedMovieItem>>>("coming-soon", {
+    cursor: params.cursor,
+    limit: params.limit,
+  });
 }
