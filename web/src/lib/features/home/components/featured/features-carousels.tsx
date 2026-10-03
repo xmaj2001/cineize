@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Carousel, CarouselContent } from "@/components/ui/carousel";
 import { FeaturedMovieItem } from "../../type";
-import { TrailerModal } from "@/components/TrailerModal";
+import { TrailerModal } from "@/lib/features/movies/components/header/TrailerModal";
 import { FeaturedCarouselItem } from "./feature-carousel-Item";
 
 interface FeaturesCarouselProps {

@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Dictionary } from "@/app/lib/dictionaries";
 import { MovieDetails } from "../../type";
 import { Bell, Play, Ticket, Sparkles } from "lucide-react";
-import { TrailerModal } from "../../../../../components/TrailerModal";
-import { NotifyMeModal } from "@/components/NotifyMeModal";
+import { NotifyMeModal } from "@/lib/features/movies/components/header/NotifyMeModal";
+import { TrailerModal } from "@/lib/features/movies/components/header/TrailerModal";
 
 interface HeaderMovieActionsProps {
   dict: Dictionary;

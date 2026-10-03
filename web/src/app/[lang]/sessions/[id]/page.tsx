@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import NotFound from "../../not-found";
 import { JsonLd } from "@/components/JsonLd";
 
 import { getDictionary } from "@/app/lib/dictionaries";
