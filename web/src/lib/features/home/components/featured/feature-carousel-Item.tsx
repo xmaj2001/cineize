@@ -158,7 +158,6 @@ export function FeaturedCarouselItem({
                   href={`/${lang}/movies/${movie.slug}`}
                   className="inline-flex items-center gap-2.5 rounded-full bg-amber-600 hover:bg-amber-500 text-white px-8 py-3.5 text-sm md:text-base font-bold shadow-lg transition transform hover:-translate-y-0.5"
                 >
-                  <Sparkles className="h-5 w-5" />
                   {dict.movies.hero.buy_presale || "Garantir Pré-venda"}
                 </Link>
               )}
