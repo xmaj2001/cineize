@@ -44,11 +44,11 @@
     "now_showing": "Now Showing",
     "pre_sale": "Pre-Sale",
     "coming_soon": "Coming Soon",
-    "view_all": "View All",
-    "feedcarditem": {
-      "pre_premiere": "Pre-Premiere",
-      "click_to_select": "Click to select this time and pick seats"
-    }
+    "view_all": "View All"
+  },
+  "feedcarditem": {
+    "pre_premiere": "Pre-Premiere",
+    "click_to_select": "Click to select this time and pick seats"
   },
   "movies": {
     "page": {
@@ -60,12 +60,11 @@
     },
     "hero": {
       "featured": "Featured",
-      "view_sessions": "VIEW SESSIONS",
+      "view_sessions": "View Sessions",
       "watch_trailer": "Watch Trailer",
       "notify_me": "Notify Me",
       "notified": "Notification Active",
       "subtitle_lang": "SUB"
-
     },
     "card": {
       "pre_premiere": "Pre-Premiere",

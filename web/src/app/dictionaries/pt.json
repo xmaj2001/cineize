@@ -44,11 +44,11 @@
     "now_showing": "Em Cartaz",
     "pre_sale": "Pré-Venda",
     "coming_soon": "Em Breve",
-    "view_all": "Ver Todos",
-    "feedcarditem": {
-      "pre_premiere": "Pré-Estreia",
-      "click_to_select": "Clique para selecionar este horário e escolher assentos"
-    }
+    "view_all": "Ver Todos"
+  },
+  "feedcarditem": {
+    "pre_premiere": "Pré-Estreia",
+    "click_to_select": "Clique para selecionar este horário e escolher assentos"
   },
   "movies": {
     "page": {
@@ -59,6 +59,7 @@
       "subtitle": "Escolhe o teu filme favorito, consulta as sessões disponíveis nas salas cineIze em Angola e garante os teus bilhetes."
     },
     "hero": {
+      "featured": "Em Destaque",
       "view_sessions": "Ver Sessões",
       "watch_trailer": "Ver Trailer",
       "notify_me": "Notificar-me",
@@ -147,7 +148,6 @@
       }
     }
   },
-  "feedcarditem": {},
   "sessions": {
     "header": {
       "session": "Sessão",
