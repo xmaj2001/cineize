@@ -11,6 +11,7 @@ import { LocationsModule } from "./modules/locations/locations.module";
 import { CinemasModule } from "./modules/cinemas/cinemas.module";
 import { MoviesModule } from "./modules/movies/movies.module";
 import { SessionsModule } from "./modules/sessions/sessions.module";
+import { HealthController } from "./modules/app/health.controller";
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { SessionsModule } from "./modules/sessions/sessions.module";
     MoviesModule,
     SessionsModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [AppService],
 })
 export class AppModule {}

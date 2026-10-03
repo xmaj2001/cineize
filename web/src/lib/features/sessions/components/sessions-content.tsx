@@ -19,7 +19,7 @@ export async function SessionsContent({
   // TODO Tratar em caso de vir vazio as sessões
   const grouped = groupSessionsByDay(res.data.items, lang, dict);
   return (
-    <section id="sessoes" className="py-2">
+    <section id="sessions" className="py-2">
       <h2 className="text-lg font-display font-bold uppercase tracking-wider text-foreground mb-6 flex items-center gap-2">
         {dict.movies.sessions_list.title}
       </h2>

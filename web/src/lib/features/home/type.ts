@@ -4,7 +4,7 @@ export type Format = "TWOD" | "THREED" | "FOURD" | "MAX";
 export interface CatalogSession {
   id: number;
   startDateTime: string; // Date vira string no JSON
-  price: string;         // Prisma Decimal serializa como string
+  price: string; // Prisma Decimal serializa como string
   cinema: { slug: string };
 }
 
@@ -38,6 +38,12 @@ export interface FeaturedMovieItem {
   trailerUrl: string | null;
   headline: string | null;
   bannerUrl: string | null;
+  genres: string[];
+  ageRating: string | null;
+  synopsis: string | null;
+  durationMinutes: number | null;
+  status?: "NOW_SHOWING" | "COMING_SOON" | "PRESALE"; // Adicionado para controlo
+  hasSessions?: boolean; // Alternativa: boleano direto enviado do backend
 }
 
 export interface FeedMovieItem {

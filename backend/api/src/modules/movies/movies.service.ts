@@ -6,7 +6,12 @@ import {
 import { CreateMovieDto } from "./dto/create-movie.dto";
 import { UpdateMovieDto } from "./dto/update-movie.dto";
 import { PrismaService } from "src/shared/prisma/prisma.service";
-import { AgeRating, Prisma, SessionState } from "src/generated/prisma/client";
+import {
+  AgeRating,
+  ExhibitionType,
+  Prisma,
+  SessionState,
+} from "src/generated/prisma/client";
 
 @Injectable()
 export class MoviesService {
@@ -179,6 +184,8 @@ export class MoviesService {
   }
 
   async findMovieBySlug(slug: string) {
+    const now = new Date();
+    // TODO: Performa essa consulta
     const movie = await this.prisma.movie.findUnique({
       where: { slug },
       select: {
@@ -196,12 +203,57 @@ export class MoviesService {
         posterUrl: true,
         backdropUrl: true,
         trailerUrl: true,
+        // Verifica se há pré-venda ativa
+        exhibitions: {
+          where: {
+            active: true,
+            type: ExhibitionType.PRE_SALE,
+            startDate: { lte: now },
+            OR: [{ endDate: null }, { endDate: { gte: now } }],
+          },
+          take: 1,
+          select: { id: true },
+        },
+        // Verifica se existem sessões futuras disponíveis
+        sessionMovies: {
+          where: {
+            active: true,
+            startDateTime: { gte: now },
+          },
+          take: 1,
+          select: { id: true },
+        },
       },
     });
+
     if (!movie) {
       throw new NotFoundException(`Movie with slug ${slug} not found`);
     }
-    return movie;
+
+    // Mesma lógica de determinação de status do teu UseCase
+    const hasSessions = movie.sessionMovies.length > 0;
+    const hasActivePresale = movie.exhibitions.length > 0;
+    const isFutureRelease = movie.worldLaunchDate
+      ? movie.worldLaunchDate > now
+      : false;
+
+    let status: any;
+
+    if (isFutureRelease) {
+      status = hasActivePresale ? "PRESALE" : "COMING_SOON";
+    } else {
+      status = "NOW_SHOWING";
+    }
+
+    // Extrai as relações temporárias para retornar o DTO limpo
+    const { ...movieData } = movie;
+
+    return {
+      ...movieData,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      status,
+      hasSessions,
+    };
   }
 
   async update(id: number, dto: UpdateMovieDto) {

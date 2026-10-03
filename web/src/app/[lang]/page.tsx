@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Metadata } from "next";
 import { NowShowingSection } from "@/lib/features/home/components/now-showing/now-showing-section";
 import { PreSaleSection } from "@/lib/features/home/components/pre-sale/pre-sale-section";
+import { FeaturesHero } from "@/lib/features/home/components/featured/features";
 
 interface pageProps {
   params: Promise<{ lang: Locale }>;
@@ -72,7 +73,7 @@ export default async function Home({ params }: pageProps) {
   return (
     <>
       <JsonLd data={jsonLd} />
-      {/* <Hero movies={feeds.data.featured} /> */}
+      <FeaturesHero />
       <div className="px-4 py-8 md:px-8 max-w-7xl mx-auto flex flex-col gap-10">
          <NowShowingSection lang={lang} />
          <PreSaleSection lang={lang}/>

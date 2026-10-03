@@ -60,10 +60,12 @@
     },
     "hero": {
       "featured": "Featured",
-      "buy_ticket": "Buy Ticket",
+      "view_sessions": "VIEW SESSIONS",
       "watch_trailer": "Watch Trailer",
-      "view_details": "View Details",
+      "notify_me": "Notify Me",
+      "notified": "Notification Active",
       "subtitle_lang": "SUB"
+
     },
     "card": {
       "pre_premiere": "Pre-Premiere",
@@ -78,6 +80,7 @@
       "director": "Director",
       "notify_me": "Notify Me",
       "watch_trailer": "Watch Trailer",
+      "buy_presale": "Buy Pre-Sale",
       "subtitles": "SUB"
     },
     "info": {

@@ -42,15 +42,15 @@ export async function HeaderMovieContent({
       )}
 
       {/* Máscaras de Gradiente Direcionadas para Leitura Perfeita */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-background via-background/20 to-transparent" />
-      <div className="absolute inset-0 z-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
+      <div className="absolute inset-0 z-0 bg-linear-to-r from-background via-background/20 to-transparent" />
+      <div className="absolute inset-0 z-0 bg-linear-to-t from-background via-background/10 to-transparent" />
 
       {/* Container Principal */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-24 pb-12 md:pt-32 md:pb-16 grid md:grid-cols-[1fr_260px] lg:grid-cols-[1fr_300px] gap-8 items-end">
         {/* Lado Esquerdo: Detalhes + Ações */}
         <div className="flex flex-col gap-6 w-full">
           <HeaderMovieDetails movie={movie} dict={dict} lang={lang} />
-          <HeaderMovieActions dict={dict} movie={movie} isComingSoon={true} />
+          <HeaderMovieActions dict={dict} movie={movie} lang={lang} />
         </div>
 
         {/* Lado Direito: Poster de Capa */}

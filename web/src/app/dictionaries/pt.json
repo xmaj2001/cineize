@@ -59,10 +59,10 @@
       "subtitle": "Escolhe o teu filme favorito, consulta as sessões disponíveis nas salas cineIze em Angola e garante os teus bilhetes."
     },
     "hero": {
-      "featured": "Em Destaque",
-      "buy_ticket": "Comprar Bilhete",
+      "view_sessions": "Ver Sessões",
       "watch_trailer": "Ver Trailer",
-      "view_details": "Ver Detalhes",
+      "notify_me": "Notificar-me",
+      "notified": "Notificação Ativa",
       "subtitle_lang": "LEG"
     },
     "card": {
@@ -78,6 +78,7 @@
       "director": "Direção",
       "notify_me": "Avisar-me",
       "watch_trailer": "Ver Trailer",
+      "buy_presale": "Comprar Pré-Venda",
       "subtitles": "LEG"
     },
     "info": {
@@ -146,9 +147,7 @@
       }
     }
   },
-  "feedcarditem": {
-
-  },
+  "feedcarditem": {},
   "sessions": {
     "header": {
       "session": "Sessão",
